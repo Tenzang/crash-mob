@@ -8,7 +8,7 @@ import NewCharacter from "./NewCharacter";
 import Dashboard from './Dashboard';
 import Home from './Home'
 import Registration from './auth/Registration';
-
+import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";
 
 export default class App extends Component{
   constructor(){
@@ -38,6 +38,7 @@ export default class App extends Component{
             <Route path="/auth/registration" element={<><Registration/></>}/>
             <Route path="/character" element={<><Characters /></>}/>
             <Route path="/newcharacter" element={<><NewCharacter /></>}/>
+            <Route path="/charactersheet" element={<><CharacterSheetParent /></>}/>
           </Routes>
       </div>
     );
