@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from 'axios';
 
 import Scores from './Scores';
 import Skills from "./Skills";
@@ -11,12 +12,12 @@ class CharacterSheetParent extends Component{
 
         this.state = {
             abilities: { // will update with data from SERVER
-                strength: { score: 11, modifier: modifier(11) },
-                dexterity: { score: 14, modifier: modifier(14) },
-                constitution: { score: 18, modifier: modifier(18) },
-                intelligence: { score: 14, modifier: modifier(14) },
-                wisdom: { score: 7, modifier: modifier(7) },
-                charisma: { score: 18, modifier: modifier(18) }
+                strength: { score: 0, modifier: modifier(11) },
+                dexterity: { score: 0, modifier: modifier(14) },
+                constitution: { score: 0, modifier: modifier(18) },
+                intelligence: { score: 0, modifier: modifier(14) },
+                wisdom: { score: 0, modifier: modifier(7) },
+                charisma: { score: 0, modifier: modifier(18) }
             },
             skills: {
                 acrobatics: { proficient: false, ability: 'dexterity' },
@@ -38,12 +39,36 @@ class CharacterSheetParent extends Component{
                 stealth: { proficient: false, ability: 'dexterity' },
                 survival: { proficient: false, ability: 'wisdom' },
             },
-            proficiencyMod: 2
+            proficiencyMod: 2,
+            URL: {character: "http://localhost:3000/characters/5.json" , score: "http://localhost:3000/scores/5.json" }
+
         };
 
     }
 
+    componentDidMount() {
+        const fetchData = URL => {
+            // data from character table
+            axios(URL.character).then(response => {
+                console.log(response);
+            });
+            // data from score table
+            axios(URL.score).then(response => {
+                const {data} = response
+                const newAbilities = { abilities: {} }
+                for (const key in data) {
+                    newAbilities.abilities[key] = { score: data[key], modifier: modifier(data[key]) }
+                }
+                this.setState(newAbilities);
+            });
+            // TODO: data from proficiency tables
+        }
+
+        fetchData(this.state.URL);
+    }
+
     render(){
+
         return(
             <div>
                 <Scores abilities={ this.state.abilities } />
