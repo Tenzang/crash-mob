@@ -6,6 +6,7 @@ import Characters from "./Characters";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import NewCharacter from "./NewCharacter";
+import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";
 
 function App() {
   
@@ -23,10 +24,9 @@ function App() {
           <Route path="/signup" element={<><SignUp /></>}/>
           <Route path="/character" element={<><Characters /></>}/>
           <Route path="/newcharacter" element={<><NewCharacter /></>}/>
+          <Route path="/charactersheet" element={<><CharacterSheetParent /></>}/>
         </Routes>
 
-    
-     
     </div>
   );
 
