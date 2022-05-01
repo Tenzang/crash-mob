@@ -9,6 +9,7 @@ import Level from "./Level";
 import Scores from './Scores';
 import Skills from "./Skills";
 import SavingThrows from "./SavingThrows";
+import Health from "./Health";
 
 
 const modifier = score => Math.floor((score - 10) / 2);
@@ -59,7 +60,8 @@ class CharacterSheetParent extends Component{
                 intelligence: false,
                 wisdom: false,
                 charisma: false
-            }
+            },
+            hitDice: 8
         };
 
     }
@@ -91,7 +93,7 @@ class CharacterSheetParent extends Component{
     }
 
     render(){
-        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs } = this.state;
+        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice } = this.state;
         return(
             <div>
                 <Name name={ name } />
@@ -103,6 +105,8 @@ class CharacterSheetParent extends Component{
                 <SavingThrows abilities={ abilities } saveProfs={ saveProfs } proficiency={ proficiencyMod }/>
 
                 <Skills abilities={ abilities } skills={ skills } proficiency={ proficiencyMod } />
+
+                <Health abilities={ abilities } hitpoints={ hitpoints } level={ level } hitDice={ hitDice } />
             </div>
         );
     }
