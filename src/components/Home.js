@@ -14,7 +14,6 @@ export default class Home extends Component {
     return (
       <div>
           <h1>Home</h1>
-          <h2>Status:{this.props.loggedInStatus}</h2>
       </div>
     )
   }

@@ -13,7 +13,7 @@ import axios from 'axios'
 
 function App(){
 
-  const[loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN")
+  const[loggedInStatus, setLoggedInStatus] = useState(false)
   const[user, setUser] = useState({})
 
   const navigate = useNavigate();
@@ -32,8 +32,7 @@ function App(){
     const data = await response.json()
     console.log(data)
     setUser(data)
-    //GET RID OF THIS
-    setLoggedInStatus("LOGGED_IN")///FIX THIS BUG
+    setLoggedInStatus(data.logged_in)///FIX THIS BUG
   };
   
   // useEffect(()=>{
@@ -42,8 +41,9 @@ function App(){
 
 
   function loggedIn(path, data){
+    console.log(data)
     navigate(path, data)
-    setLoggedInStatus("LOGGED_IN")
+    setLoggedInStatus(data.logged_in)
     setUser(data.user)
   }
 
@@ -60,25 +60,36 @@ function App(){
     )
     const data = await response.json()
     console.log(data)
-    setLoggedInStatus("NOT_LOGGED_IN")
+    setLoggedInStatus(data.logged_in)
     setUser({})
+    navigate('/auth/login', data)
   }
+
 
     return (
       <div className="App">
         <nav>
-        <Link to="/auth/registration">Sign Up</Link>
-        <Link to="/auth/login">Sign In</Link>
-        <Link to="/character">Characters</Link>
-        <Link to="/newcharacter">New Character</Link>
-        <button onClick={()=>loggedOut()}>LogOut</button>
-        
+        {loggedInStatus?
+          <>
+            <h4>Logged In</h4>
+            <Link to="/character">Characters</Link>
+            <Link to="/newcharacter">New Character</Link>
+            <Link to = '' onClick={()=>loggedOut()}>LogOut</Link>
+          </>
+        :
+          <>
+            <h4>Logged Out</h4>
+            <Link to="/auth/registration">Sign Up</Link>
+            <Link to="/auth/login">Sign In</Link>
+          </>
+        }
+
         </nav>
           <Routes>
             <Route exact path={'/'} element={<Home fetchUser={fetchUser} loggedInStatus={loggedInStatus}/>}/>
             <Route exact path={'/dashboard'} element={<Dashboard fetchUser={fetchUser} loggedInStatus={loggedInStatus} />}/>
             <Route path="/auth/registration" element={<><Registration fetchUser={fetchUser} handleSuccessfulAuth={loggedIn} /></>}/>
-            <Route path="/auth/login" element={<><Login fetchUser={fetchUser} handleSuccessfulAuth={loggedIn} /></>}/>
+            <Route path="/auth/login" element={<><Login navRegistration={loggedOut} fetchUser={fetchUser} handleSuccessfulAuth={loggedIn} /></>}/>
             <Route path="/character" element={<><Characters fetchUser={fetchUser} /></>}/>
             <Route path="/newcharacter" element={<><NewCharacter fetchUser={fetchUser} /></>}/>
             <Route path="/charactersheet" element={<><CharacterSheetParent fetchUser={fetchUser} /></>}/>

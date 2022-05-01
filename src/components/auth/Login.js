@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Button, Grid, Paper, Avatar, TextField, Typography, Link} from '@material-ui/core'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+// import { Link } from "react-router-dom";
 
 export default class Login extends Component {
     constructor(props){
@@ -37,7 +40,7 @@ export default class Login extends Component {
         ).then((response) => {
             if (response.data.logged_in){
             console.log(response.data)
-            this.props.handleSuccessfulAuth('/charactersheet', response.data);
+            this.props.handleSuccessfulAuth('/', response.data);
             }
         }).catch(error=>{
             console.log('login error', error)
@@ -47,16 +50,36 @@ export default class Login extends Component {
     componentDidMount(){
         this.props.fetchUser();
     }
+
     
   render() {
+    const paperStyle = {padding :20, height: 500, width:340, margin: '20px auto'}
+    const avatarStyle = {backgroundColor:'#3DDC97'}
+    const btnstyle = {margin:'20px 0'}
     return (
-      <div>
-         <form onSubmit={this.handleSubmit}>
-            <input type="email" name='email' placeholder='Email' value={this.state.email} onChange={this.handleChange} required/>
-            <input type="password" name='password' placeholder='Password' value={this.state.password} onChange={this.handleChange} required/>
-            <button type='submit'>Login</button>
-         </form>
-      </div>
+        <div>
+             <form onSubmit={this.handleSubmit}>
+            <Grid>
+                <Paper elevation={10} style={paperStyle}>
+                    <Grid align='center'>
+                        <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
+                        <h2>Sign In</h2>
+                    </Grid>
+                    <Grid align='center'>
+                        <TextField label='Email' name='email' value={this.state.email} placeholder="Enter Email" fullWidth onChange={this.handleChange} required></TextField>
+                        <TextField label='Password' name='password' value={this.state.password} placeholder="Enter Password" type="password" fullWidth onChange={this.handleChange} required></TextField>       
+                        <Button variant='contained' color="primary" style={btnstyle} type='submit' fullWidth>Login</Button>
+                        <Typography> Do you have an account? <br></br>
+                            <Link href="/auth/registration" onClick={()=>this.props.navRegistration}>
+                                {/* NOT WORKING , OR REDIRECTING TO SIGN UP HOW FIX????????????? */}
+                                Create Account
+                            </Link>
+                        </Typography>
+                    </Grid>
+                </Paper>
+            </Grid>
+            </form>
+        </div>
     )
   }
 }
