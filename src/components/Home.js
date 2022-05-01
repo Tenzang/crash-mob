@@ -5,6 +5,11 @@ export default class Home extends Component {
   constructor(props){
     super(props);
   }
+
+    componentDidMount(){
+      this.props.fetchUser();
+  }
+  
   render() {
     return (
       <div>

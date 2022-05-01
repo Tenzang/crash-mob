@@ -14,6 +14,9 @@ export default class navigation extends Component {
             user: {}
         }
     }
+    componentDidMount(){
+      this.props.fetchUser();
+  }
   render() {
     return (
       <div>

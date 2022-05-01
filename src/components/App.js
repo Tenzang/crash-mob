@@ -1,46 +1,89 @@
 
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { render } from "@testing-library/react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Characters from "./Characters";
-import SignIn from "./SignIn";
 import NewCharacter from "./NewCharacter";
 import Dashboard from './Dashboard';
 import Home from './Home'
 import Registration from './auth/Registration';
+import Login from './auth/Login'
 import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";
+import axios from 'axios'
 
-export default class App extends Component{
-  constructor(){
-    //overide state
-    super();
-    this.state={
-        loggedInStatus: "NOT_LOGGED_IN",
-        //eventually we will populate this from data in the api
-        user: {}
-    }
-}
-  render(){
-    
+function App(){
+
+  const[loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN")
+  const[user, setUser] = useState({})
+
+  const navigate = useNavigate();
+
+  const fetchUser = async ()=>{
+    const response = await fetch(
+      'http://localhost:3000/logged_in',{
+        method: 'GET',
+        credentials: 'include',
+        headers:{
+          'Content-type': 'application/json',
+          'Accept': 'application/json'
+        },
+      }
+    )
+    const data = await response.json()
+    console.log(data)
+    setUser(data)
+    //GET RID OF THIS
+    setLoggedInStatus("LOGGED_IN")///FIX THIS BUG
+  };
+  
+  // useEffect(()=>{
+  //   setTimeout(()=>fetchUser(), 3000)
+  // })
+
+
+  function loggedIn(path, data){
+    navigate(path, data)
+    setLoggedInStatus("LOGGED_IN")
+    setUser(data.user)
+  }
+
+  const loggedOut = async()=>{
+    const response = await fetch(
+      'http://localhost:3000/logout',{
+        method: 'DELETE',
+        credentials: 'include',
+        headers:{
+          'Content-type': 'application/json',
+          'Accept': 'application/json'
+        },
+      }
+    )
+    const data = await response.json()
+    console.log(data)
+    setLoggedInStatus("NOT_LOGGED_IN")
+    setUser({})
+  }
+
     return (
       <div className="App">
         <nav>
-        <Link to="/signin">Sign In</Link>
         <Link to="/auth/registration">Sign Up</Link>
+        <Link to="/auth/login">Sign In</Link>
         <Link to="/character">Characters</Link>
         <Link to="/newcharacter">New Character</Link>
+        <button onClick={()=>loggedOut()}>LogOut</button>
         
         </nav>
           <Routes>
-            <Route exact path={'/'} element={<Home loggedInStatus={this.state.loggedInStatus}/>}/>
-            <Route exact path={'/dashboard'} element={<Dashboard loggedInStatus={this.state.loggedInStatus} />}/>
-            <Route path="/signin" element={<><SignIn /></>}/>
-            <Route path="/auth/registration" element={<><Registration/></>}/>
-            <Route path="/character" element={<><Characters /></>}/>
-            <Route path="/newcharacter" element={<><NewCharacter /></>}/>
-            <Route path="/charactersheet" element={<><CharacterSheetParent /></>}/>
+            <Route exact path={'/'} element={<Home fetchUser={fetchUser} loggedInStatus={loggedInStatus}/>}/>
+            <Route exact path={'/dashboard'} element={<Dashboard fetchUser={fetchUser} loggedInStatus={loggedInStatus} />}/>
+            <Route path="/auth/registration" element={<><Registration fetchUser={fetchUser} handleSuccessfulAuth={loggedIn} /></>}/>
+            <Route path="/auth/login" element={<><Login fetchUser={fetchUser} handleSuccessfulAuth={loggedIn} /></>}/>
+            <Route path="/character" element={<><Characters fetchUser={fetchUser} /></>}/>
+            <Route path="/newcharacter" element={<><NewCharacter fetchUser={fetchUser} /></>}/>
+            <Route path="/charactersheet" element={<><CharacterSheetParent fetchUser={fetchUser} /></>}/>
           </Routes>
       </div>
     );
-  }
 }
+export default App;

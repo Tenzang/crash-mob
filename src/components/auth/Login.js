@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-export default class extends Component {
+export default class Login extends Component {
     constructor(props){
         super(props)
         this.state={
-            username: '',
             email: '',
             password: '',
-            password_confirmation: '',
-            registrationErrors: '',
+            loginErrors: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -24,45 +22,39 @@ export default class extends Component {
     handleSubmit(event){
         const{
             email,
-            username,
             password,
-            password_confirmation
         } = this.state;
         
         event.preventDefault();
 
-        axios.post("http://localhost:3000/registrations",{
+        axios.post("http://localhost:3000/sessions",{
             user:{
                 email: email,
-                username: username,
-                password: password,
-                password_confirmation: password_confirmation
+                password: password
             }
         },
         { withCredentials: true }
         ).then((response) => {
-            if (response.data.status==="created"){
+            if (response.data.logged_in){
             console.log(response.data)
             this.props.handleSuccessfulAuth('/charactersheet', response.data);
             }
         }).catch(error=>{
-            console.log('registration error', error)
+            console.log('login error', error)
         });
     }
 
     componentDidMount(){
         this.props.fetchUser();
     }
-
+    
   render() {
     return (
       <div>
          <form onSubmit={this.handleSubmit}>
             <input type="email" name='email' placeholder='Email' value={this.state.email} onChange={this.handleChange} required/>
-            <input type="username" name='username' placeholder='Username' value={this.state.username} onChange={this.handleChange} required/>
             <input type="password" name='password' placeholder='Password' value={this.state.password} onChange={this.handleChange} required/>
-            <input type="password" name='password_confirmation' placeholder='Password confirmation' value={this.state.password_confirmation} onChange={this.handleChange} required/>
-            <button type='submit'>Register</button>
+            <button type='submit'>Login</button>
          </form>
       </div>
     )
