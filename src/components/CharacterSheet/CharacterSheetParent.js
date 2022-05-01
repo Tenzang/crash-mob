@@ -1,8 +1,15 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
+import Name from "./Name";
+import Race from "./Race";
+import Role from "./Role";
+import Level from "./Level";
+
 import Scores from './Scores';
 import Skills from "./Skills";
+import SavingThrows from "./SavingThrows";
+
 
 const modifier = score => Math.floor((score - 10) / 2);
 
@@ -40,8 +47,19 @@ class CharacterSheetParent extends Component{
                 survival: { proficient: false, ability: 'wisdom' },
             },
             proficiencyMod: 2,
-            URL: {character: "http://localhost:3000/characters/5.json" , score: "http://localhost:3000/scores/5.json" }
-
+            URL: {character: "http://localhost:3000/characters/5.json" , score: "http://localhost:3000/scores/5.json" },
+            name: "???",
+            race: "???",
+            role: "???",
+            level: 0,
+            saveProfs: {
+                strength: false,
+                dexterity: false,
+                constitution: false,
+                intelligence: false,
+                wisdom: false,
+                charisma: false
+            }
         };
 
     }
@@ -50,11 +68,16 @@ class CharacterSheetParent extends Component{
         const fetchData = URL => {
             // data from character table
             axios(URL.character).then(response => {
-                console.log(response);
+                const { data } = response;
+                const newState = {};
+                for (const key in data) {
+                    newState[key] = data[key];
+                }
+                this.setState(newState);
             });
             // data from score table
             axios(URL.score).then(response => {
-                const {data} = response
+                const { data } = response
                 const newAbilities = { abilities: {} }
                 for (const key in data) {
                     newAbilities.abilities[key] = { score: data[key], modifier: modifier(data[key]) }
@@ -68,11 +91,18 @@ class CharacterSheetParent extends Component{
     }
 
     render(){
-
+        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs } = this.state;
         return(
             <div>
-                <Scores abilities={ this.state.abilities } />
-                <Skills abilities={ this.state.abilities } skills={ this.state.skills } proficiency={ this.state.proficiencyMod } />
+                <Name name={ name } />
+                <Race race={ race } />
+                <Role role={ role } />
+                <Level level={ level } />
+                
+                <Scores abilities={ abilities } />
+                <SavingThrows abilities={ abilities } saveProfs={ saveProfs } proficiency={ proficiencyMod }/>
+
+                <Skills abilities={ abilities } skills={ skills } proficiency={ proficiencyMod } />
             </div>
         );
     }
