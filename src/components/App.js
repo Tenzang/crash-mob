@@ -3,7 +3,6 @@ import React, { Component, useState, useEffect } from 'react';
 import { render } from "@testing-library/react";
 import { Routes, Route, Link, useNavigate, Redirect, Navigate } from "react-router-dom";
 import Characters from "./Characters";
-import NewCharacter from "./NewCharacter";
 import Dashboard from './Dashboard';
 import Home from './Home'
 import Registration from './auth/Registration';
@@ -11,6 +10,8 @@ import Login from './auth/Login'
 import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";
 import fetchUser from './fetchUser'
 
+import axios from 'axios'
+import NewCharacterParent from './CharacterForm/NewCharacterParent';
 
 function App(){
 
@@ -81,7 +82,7 @@ function App(){
               <Route path="/auth/login" element={<><Login fetchUser={checkLogin} handleSuccessfulAuth={loggedIn} /></>}/>
               <Route exact path={'/dashboard'} element={<Dashboard fetchUser={checkLogin} loggedInStatus={loggedInStatus} />}/>
               <Route path="/character" element={<><Characters fetchUser={checkLogin} /></>}/>
-              <Route path="/newcharacter" element={<><NewCharacter fetchUser={checkLogin} /></>}/>
+              <Route path="/newcharacter" element={<><NewCharacterParent fetchUser={checkLogin} /></>}/>
               <Route path="/charactersheet" element={<><CharacterSheetParent fetchUser={checkLogin} /></>}/>
               <Route path='/redirect' element={<Navigate to='/auth/login'/>}/>
           </Routes>
