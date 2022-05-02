@@ -3,13 +3,13 @@ import React, { Component, useState, useEffect } from 'react';
 import { render } from "@testing-library/react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Characters from "./Characters";
-import NewCharacter from "./NewCharacter";
 import Dashboard from './Dashboard';
 import Home from './Home'
 import Registration from './auth/Registration';
 import Login from './auth/Login'
 import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";
 import axios from 'axios'
+import NewCharacterParent from './CharacterForm/NewCharacterParent';
 
 function App(){
 
@@ -91,7 +91,7 @@ function App(){
             <Route path="/auth/registration" element={<><Registration fetchUser={fetchUser} handleSuccessfulAuth={loggedIn} /></>}/>
             <Route path="/auth/login" element={<><Login navRegistration={loggedOut} fetchUser={fetchUser} handleSuccessfulAuth={loggedIn} /></>}/>
             <Route path="/character" element={<><Characters fetchUser={fetchUser} /></>}/>
-            <Route path="/newcharacter" element={<><NewCharacter fetchUser={fetchUser} /></>}/>
+            <Route path="/newcharacter" element={<><NewCharacterParent fetchUser={fetchUser} /></>}/>
             <Route path="/charactersheet" element={<><CharacterSheetParent fetchUser={fetchUser} /></>}/>
           </Routes>
       </div>
