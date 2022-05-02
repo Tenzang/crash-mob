@@ -3,7 +3,7 @@ import Registration from './auth/Registration'
 
 export default class Home extends Component {
   constructor(props){
-    super(props);
+    super();
   }
 
     componentDidMount(){
