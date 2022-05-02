@@ -48,7 +48,7 @@ class CharacterSheetParent extends Component{
                 survival: { proficient: false, ability: 'wisdom' },
             },
             proficiencyMod: 2,
-            URL: {character: "http://localhost:3000/characters/5.json" , score: "http://localhost:3000/scores/5.json" },
+            URL: {character: "http://localhost:3000/characters/3.json" , score: "http://localhost:3000/scores/3.json" },
             name: "???",
             race: "???",
             role: "???",
@@ -79,9 +79,11 @@ class CharacterSheetParent extends Component{
             });
             // data from score table
             axios(URL.score).then(response => {
+                console.log(response)
                 const { data } = response
                 const newAbilities = { abilities: {} }
                 for (const key in data) {
+                    console.log(data)
                     newAbilities.abilities[key] = { score: data[key], modifier: modifier(data[key]) }
                 }
                 this.setState(newAbilities);
