@@ -11,6 +11,9 @@ import Skills from "./Skills";
 import SavingThrows from "./SavingThrows";
 import Health from "./Health";
 
+const sourceURL = 'http://localhost:3000';
+let characterID = window.location.href;
+characterID = characterID[characterID.length-1];
 
 const modifier = score => Math.floor((score - 10) / 2);
 
@@ -48,7 +51,7 @@ class CharacterSheetParent extends Component{
                 survival: { proficient: false, ability: 'wisdom' },
             },
             proficiencyMod: 2,
-            URL: {character: "http://localhost:3000/characters/3.json" , score: "http://localhost:3000/scores/3.json" },
+            URL: {character: `${sourceURL}/characters/${characterID}.json`, score: `${sourceURL}/scores/${characterID}.json` },
             name: "???",
             race: "???",
             role: "???",

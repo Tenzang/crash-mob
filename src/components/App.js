@@ -2,7 +2,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { render } from "@testing-library/react";
 import { Routes, Route, Link, useNavigate, Redirect, Navigate } from "react-router-dom";
-import Characters from "./Characters";
+import CharacterIndexParent from "./CharacterIndex/CharacterIndexParent";
 import Dashboard from './Dashboard';
 import Home from './Home'
 import Registration from './auth/Registration';
@@ -64,7 +64,7 @@ function App(){
         {loggedInStatus?
           <>
             <h4>Logged In</h4>
-            <Link to="/character">Characters</Link>
+            <Link to="/characters">Characters</Link>
             <Link to="/newcharacter">New Character</Link>
             <Link to = '' onClick={()=>loggedOut()}>LogOut</Link>
           </>
@@ -81,9 +81,9 @@ function App(){
               <Route path="/auth/registration" element={<><Registration fetchUser={checkLogin} handleSuccessfulAuth={loggedIn} /></>}/>
               <Route path="/auth/login" element={<><Login fetchUser={checkLogin} handleSuccessfulAuth={loggedIn} /></>}/>
               <Route exact path={'/dashboard'} element={<Dashboard fetchUser={checkLogin} loggedInStatus={loggedInStatus} />}/>
-              <Route path="/character" element={<><Characters fetchUser={checkLogin} /></>}/>
+              <Route path="/characters" element={<><CharacterIndexParent fetchUser={checkLogin} /></>}/>
               <Route path="/newcharacter" element={<><NewCharacterParent fetchUser={checkLogin} /></>}/>
-              <Route path="/charactersheet" element={<><CharacterSheetParent fetchUser={checkLogin} /></>}/>
+              <Route path="/charactersheet/*" element={<><CharacterSheetParent fetchUser={checkLogin} /></>}/>
               <Route path='/redirect' element={<Navigate to='/auth/login'/>}/>
           </Routes>
       </div>
