@@ -7,7 +7,7 @@ export default class Home extends Component {
   }
 
     componentDidMount(){
-      this.props.fetchUser();
+      this.props.fetchUser('/');
   }
   
   render() {

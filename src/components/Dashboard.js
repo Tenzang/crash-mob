@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class Dashboard extends Component {
       componentDidMount(){
-        this.props.fetchUser();
+        this.props.fetchUser('/dashboard');
     }
   render() {
     return (
