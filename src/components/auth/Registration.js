@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Button, Grid, Paper, Avatar, TextField, Typography, Link} from '@material-ui/core'
+import { Button, Grid, Paper, Avatar, TextField, Typography} from '@material-ui/core'
 import CreateIcon from '@material-ui/icons/Create';
+import { Link } from "react-router-dom";
+
+const registrationsURL = "http://localhost:3000/registrations"
 
 export default class extends Component {
     constructor(props){
@@ -33,7 +36,7 @@ export default class extends Component {
         
         event.preventDefault();
 
-        axios.post("http://localhost:3000/registrations",{
+        axios.post( registrationsURL ,{
             user:{
                 email: email,
                 username: username,
@@ -62,27 +65,26 @@ export default class extends Component {
         const btnstyle = {margin:'20px 0'}
     return (
         <div>
-             <form onSubmit={this.handleSubmit}>
             <Grid>
-            <Paper elevation={10} style={paperStyle}>
-                <Grid align='center'>
-                    <Avatar style={avatarStyle}><CreateIcon/></Avatar>
-                    <h2>Create an Account</h2>
-                </Grid>
-                <TextField label='Email' name='email' value={this.state.email} placeholder="Enter Email" fullWidth onChange={this.handleChange} required></TextField>
-                <TextField label='Username' name='username' value={this.state.username} placeholder="Username" fullWidth onChange={this.handleChange} required></TextField>
-                <TextField label='Password' name='password' value={this.state.password} placeholder="Enter Password" type="password" fullWidth onChange={this.handleChange} required></TextField>
-                <TextField label='Password_Confirmation' name='password_confirmation' value={this.state.password_confirmation} placeholder="Confirm Password" type="password" fullWidth onChange={this.handleChange} required></TextField>              
-                <Button variant='contained' color="primary" style={btnstyle} type='submit' fullWidth>Sign-UP</Button>
-                <Typography> Already have an account? <br></br>
-                    <Link href="/auth/login" onClick={()=>this.props.navRegistration}>
-                        {/* NOT WORKING , OR REDIRECTING TO SIGN UP HOW FIX????????????? */}
+                <Paper elevation={10} style={paperStyle}>
+                    <form onSubmit={this.handleSubmit}>
+                        <Grid align='center'>
+                            <Avatar style={avatarStyle}><CreateIcon/></Avatar>
+                            <h2>Create an Account</h2>
+                        </Grid>
+                        <TextField label='Email' name='email' value={this.state.email} placeholder="Enter Email" fullWidth onChange={this.handleChange} required></TextField>
+                        <TextField label='Username' name='username' value={this.state.username} placeholder="Username" fullWidth onChange={this.handleChange} required></TextField>
+                        <TextField label='Password' name='password' value={this.state.password} placeholder="Enter Password" type="password" fullWidth onChange={this.handleChange} required></TextField>
+                        <TextField label='Password_Confirmation' name='password_confirmation' value={this.state.password_confirmation} placeholder="Confirm Password" type="password" fullWidth onChange={this.handleChange} required></TextField>              
+                        <Button variant='contained' color="primary" style={btnstyle} type='submit' fullWidth>Sign-UP</Button>
+                        </form>
+                    <Typography> Already have an account? <br></br>
+                    <Link to="/auth/login">
                         Login
                     </Link>
-                </Typography>
-            </Paper>
+                    </Typography>
+                </Paper>
             </Grid>
-            </form>
         </div>
     )
   }
