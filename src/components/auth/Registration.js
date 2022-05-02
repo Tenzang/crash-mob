@@ -56,7 +56,7 @@ export default class extends Component {
     }
 
     componentDidMount(){
-        this.props.fetchUser();
+        this.props.fetchUser('/auth/registration');
     }
 
   render() {

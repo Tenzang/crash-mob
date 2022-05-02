@@ -22,14 +22,27 @@ function App(){
 
   const logoutURL = 'http://localhost:3000/logout'
 
-  const checkLogin=async()=>{
+  const checkLogin=async(path)=>{
+    console.log(path)
     const userData = await fetchUser();
-    console.log(userData)
-    setUser(userData)
-    setLoggedInStatus(userData.logged_in)
-    if (loggedInStatus == false){
+    console.log('userData from db', userData.logged_in)
+    if (userData.logged_in == false){
+      console.log('is user data false?',userData.logged_in)
       console.log('redirecting')
       navigate('/auth/login')
+    }
+    else{
+      console.log('is user data true?',userData.logged_in)
+      setUser(userData.user)
+      setLoggedInStatus(userData.logged_in)
+      console.log('logged in status from db',userData.logged_in)
+      console.log('state of login',loggedInStatus)
+      if (path =='/auth/login' || path == '/auth/registration'){
+        navigate('/')
+      }
+      else{
+        navigate(path)
+      }
     }
   }
 
@@ -55,16 +68,17 @@ function App(){
     console.log(data)
     setLoggedInStatus(data.logged_in)
     setUser({})
+    console.log('redirecting to login')
     navigate('/auth/login', data)
   }
 
     return (
       <div className="App">
         <nav>
-        {loggedInStatus?
+        {loggedInStatus==true?
           <>
             <h4>Logged In</h4>
-            <Link to="/character">Characters</Link>
+            <Link to="/characters">Characters</Link>
             <Link to="/newcharacter">New Character</Link>
             <Link to = '' onClick={()=>loggedOut()}>LogOut</Link>
           </>
@@ -81,10 +95,9 @@ function App(){
               <Route path="/auth/registration" element={<><Registration fetchUser={checkLogin} handleSuccessfulAuth={loggedIn} /></>}/>
               <Route path="/auth/login" element={<><Login fetchUser={checkLogin} handleSuccessfulAuth={loggedIn} /></>}/>
               <Route exact path={'/dashboard'} element={<Dashboard fetchUser={checkLogin} loggedInStatus={loggedInStatus} />}/>
-              <Route path="/character" element={<><Characters fetchUser={checkLogin} /></>}/>
+              <Route path="/characters" element={<><Characters fetchUser={checkLogin} userId={user.id} /></>}/>
               <Route path="/newcharacter" element={<><NewCharacterParent fetchUser={checkLogin} /></>}/>
               <Route path="/charactersheet" element={<><CharacterSheetParent fetchUser={checkLogin} /></>}/>
-              <Route path='/redirect' element={<Navigate to='/auth/login'/>}/>
           </Routes>
       </div>
     );

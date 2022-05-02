@@ -50,7 +50,7 @@ export default class Login extends Component {
     }
 
     componentDidMount(){
-        this.props.fetchUser();
+        this.props.fetchUser('/auth/login');
     }
 
   render() {
