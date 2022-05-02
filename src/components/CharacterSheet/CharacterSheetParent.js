@@ -73,6 +73,7 @@ class CharacterSheetParent extends Component{
         const fetchData = URL => {
             // data from character table
             axios(URL.character).then(response => {
+                console.log(response);
                 const { data } = response;
                 const newState = {};
                 for (const key in data) {
@@ -82,11 +83,10 @@ class CharacterSheetParent extends Component{
             });
             // data from score table
             axios(URL.score).then(response => {
-                console.log(response)
+                console.log(response);
                 const { data } = response
                 const newAbilities = { abilities: {} }
                 for (const key in data) {
-                    console.log(data)
                     newAbilities.abilities[key] = { score: data[key], modifier: modifier(data[key]) }
                 }
                 this.setState(newAbilities);
