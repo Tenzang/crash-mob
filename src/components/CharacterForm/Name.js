@@ -11,45 +11,39 @@ class Name extends Component {
     continue = event => {
         event.preventDefault();
         this.props.nextStep();
-    }
+    };
+
     render() {
         const { values, handleChange } = this.props;
         return (
             <MuiThemeProvider>
-            <>
-                <Dialog
-                open
-                fullWidth
-                maxWidth='sm'
-                >
-                <AppBar title="Enter User Details" />
-                <TextField
-                    placeholder="Enter Your Character's Name"
-                    label="Character Name"
-                    onChange={handleChange('name')}
-                    defaultValue={values.name}
-                    margin="normal"
-                    fullWidth
-                />
-                <br />
-                
-                <br/>
-                <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={this.continue}
-                >Continue</Button>
-                </Dialog>
-            </>
+                <>
+                    <Dialog
+                        open
+                        fullWidth
+                        maxWidth='sm'
+                    >
+                        <AppBar title="Character Name" />
+                        <h2>Character Name</h2>
+                        <TextField
+                            placeholder="Enter Your Character's Name"
+                            label="Character Name"
+                            onChange={handleChange('name')}
+                            defaultValue={values.name}
+                            margin="normal"
+                            fullWidth
+                        />
+                        <br/>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.continue}
+                        >Continue</Button>
+                    </Dialog>
+                </>
             </MuiThemeProvider>
         );
     }
 }
-// <label>Name
-        //     <input type="text" required placeholder="Name"/>
-        // </label>
-        
-    
-
 
 export default Name;

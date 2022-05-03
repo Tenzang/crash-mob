@@ -1,20 +1,14 @@
 import React, {Component} from "react";
-import axios from 'axios';
 
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
-import Level from "./Level";
+// import Level from "./Level";
 
 // import Scores from './Scores';
 // import Skills from "./Skills";
 // import SavingThrows from "./SavingThrows";
 // import Health from "./Health";
-
-const SERVER_URL = 'http://localhost:3000/character.json'
-
-
-
 
 class NewCharacterParent extends Component{
     constructor() {
@@ -23,7 +17,8 @@ class NewCharacterParent extends Component{
         this.state = {
             step: 1,
             name: '',
-            race: ''
+            race: '',
+            role: ''
         }
     };
 
@@ -50,8 +45,8 @@ class NewCharacterParent extends Component{
     
     render(){
         const { step } = this.state;
-        const { name, race } = this.state;
-        const values = { name };
+        const { name, race, role } = this.state;
+        const values = { name, race, role };
 
         switch(step) {
             case 1:
@@ -61,29 +56,30 @@ class NewCharacterParent extends Component{
                         handleChange={this.handleChange}
                         values={values}
                     />
-                )
+                );
             case 2:
                 return(
                     <Race
-                    nextStep={this.nextStep}
-                    handleChange={this.handleChange}
-                    values={values}></Race>
-                )
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
+                );
             case 3:
                 return(
-                    <h1>Third window</h1>
-                )
+                    <Role
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
+                );
+            case 4:
+                return(
+                    <h1>End of form</h1>
+                );
         }
-
-        // return(
-        //     <div>
-        //         <Name />
-        //         <Race />
-        //         <Role />
-        //         <Level />
-        //         <button>Create!</button>
-        //     </div>
-        // );
     }
 }
 export default NewCharacterParent;
