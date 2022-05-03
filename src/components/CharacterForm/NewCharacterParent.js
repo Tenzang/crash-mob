@@ -4,6 +4,8 @@ import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
 import Level from "./Level";
+import Details from "./Details";
+import Languages from "./Languages";
 // import Level from "./Level";
 
 // import Scores from './Scores';
@@ -20,7 +22,12 @@ class NewCharacterParent extends Component{
             name: '',
             race: '',
             role: '',
-            level: ''
+            level: '',
+            languages: [],
+            personality: '',
+            ideals: '',
+            bonds: '',
+            flaws: ''
         }
     };
 
@@ -47,8 +54,8 @@ class NewCharacterParent extends Component{
     
     render(){
         const { step } = this.state;
-        const { name, race, role, level } = this.state;
-        const values = { name, race, role, level};
+        const { name, race, role, level, languages, personality, ideals, bonds, flaws } = this.state;
+        const values = { name, race, role, level, languages, personality, ideals, bonds, flaws };
 
         switch(step) {
             case 1:
@@ -85,11 +92,24 @@ class NewCharacterParent extends Component{
                         handleChange={this.handleChange}
                         values={values}
                     />
-                    
                 );
             case 5:
                 return(
-                    <h1>End of form</h1>
+                    <Details
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
+                );
+            case 6:
+                return(
+                    <Languages
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
                 );
         }
     }
