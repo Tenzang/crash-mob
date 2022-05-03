@@ -1,6 +1,5 @@
 
 import React, { Component, useState, useEffect } from 'react';
-import { render } from "@testing-library/react";
 import { Routes, Route, Link, useNavigate, Redirect, Navigate } from "react-router-dom";
 import CharacterIndexParent from "./CharacterIndex/CharacterIndexParent";
 import Dashboard from './Dashboard';
@@ -9,14 +8,20 @@ import Registration from './auth/Registration';
 import Login from './auth/Login'
 import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";
 import fetchUser from './fetchUser'
-
-import axios from 'axios'
+import { AppBar, Typography, Toolbar , Tabs, Tab, Button, useMediaQuery, useTheme} from '@material-ui/core';
 import NewCharacterParent from './CharacterForm/NewCharacterParent';
+import CasinoIcon from '@material-ui/icons/Casino';
+import DrawerComp from './DrawerComp'
 
 function App(){
 
   const[loggedInStatus, setLoggedInStatus] = useState(false)
   const[user, setUser] = useState({})
+  const [navValue, setNavValue] = useState(null);
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+  const navPages =["Home", "Character", "Products", "Products"]
+
 
   const navigate = useNavigate();
 
@@ -29,7 +34,7 @@ function App(){
     if (userData.logged_in == false){
       console.log('is user data false?',userData.logged_in)
       console.log('redirecting')
-      navigate('/auth/login')
+      navigate('/auth/login') 
     }
     else{
       console.log('is user data true?',userData.logged_in)
@@ -71,15 +76,49 @@ function App(){
     console.log('redirecting to login')
     navigate('/auth/login', data)
   }
-
+  const appbarStyle = {backgroundColor:'#D00000'}
+  const tabStyle = {marginLeft: 'auto'}
+  const loginStyle = {marginLeft: 'auto' }
+  const signupStyle = {marginLeft: '10px' }
+  const titleStyle = {fontSize:'1.5rem', paddingLeft: '10%'}
     return (
       <div className="App">
+        <>
+          <AppBar style={appbarStyle}>
+            <Toolbar>
+              <CasinoIcon/>
+              {
+                isMatch ? (
+                  <>
+                    <Typography style={titleStyle}>
+                      CRASH MOB
+                    </Typography>
+                    <DrawerComp/>
+                  </>
+                ) : (
+                  <>
+                  <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
+                    {
+                      <>
+                        <Tab element={<Link to="/newcharacter">New Character</Link>}/>
+                        <Tab element={<Link to="/characters">Characters</Link>}/>
+                      </>
+                    }
+                  </Tabs>
+                  <Button style={loginStyle} variant="contained">Login</Button>
+                  <Button style={signupStyle}variant="contained">Signup</Button>
+                </>
+                )
+              }
+            </Toolbar>
+          </AppBar>
+        </>
         <nav>
         {loggedInStatus==true?
           <>
             <h4>Logged In</h4>
-            <Link to="/characters">Characters</Link>
-            <Link to="/newcharacter">New Character</Link>
+            
+            
             <Link to = '' onClick={()=>loggedOut()}>LogOut</Link>
           </>
         :
