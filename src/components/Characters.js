@@ -9,7 +9,6 @@ class Characters extends Component{
         this.state={}
     }
     
-
     componentDidMount(){
         this.props.fetchUser('/characters');
     }
