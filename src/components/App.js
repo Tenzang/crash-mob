@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import CharacterIndexParent from "./CharacterIndex/CharacterIndexParent";
