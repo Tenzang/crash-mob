@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios'
 
 import CharacterCard from './CharacterCard';
@@ -21,7 +21,7 @@ class CharacterIndexParent extends Component{
         // Fetch Characters
         axios(sourceURL + '/characters.json').then(response => {
             const characters = response.data;
-            this.setState(this.state.characters = characters);
+            this.setState({ characters: characters });
         });
     }
 

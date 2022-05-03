@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import axios from 'axios';
 
 import Name from "./Name";
 import Race from "./Race";
@@ -11,7 +10,7 @@ import Level from "./Level";
 // import SavingThrows from "./SavingThrows";
 // import Health from "./Health";
 
-const SERVER_URL = 'http://localhost:3000/character.json'
+// const SERVER_URL = 'http://localhost:3000/character.json'
 
 class NewCharacterParent extends Component{
     

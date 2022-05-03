@@ -1,7 +1,6 @@
 
-import React, { Component, useState, useEffect } from 'react';
-import { render } from "@testing-library/react";
-import { Routes, Route, Link, useNavigate, Redirect, Navigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import CharacterIndexParent from "./CharacterIndex/CharacterIndexParent";
 import Dashboard from './Dashboard';
 import Home from './Home'
@@ -10,13 +9,12 @@ import Login from './auth/Login'
 import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";
 import fetchUser from './fetchUser'
 
-import axios from 'axios'
 import NewCharacterParent from './CharacterForm/NewCharacterParent';
 
 function App(){
 
   const[loggedInStatus, setLoggedInStatus] = useState(false)
-  const[user, setUser] = useState({})
+  const[setUser] = useState({})
 
   const navigate = useNavigate();
 
@@ -26,7 +24,7 @@ function App(){
     console.log(path)
     const userData = await fetchUser();
     console.log('userData from db', userData.logged_in)
-    if (userData.logged_in == false){
+    if (userData.logged_in === false){
       console.log('is user data false?',userData.logged_in)
       console.log('redirecting')
       navigate('/auth/login')
@@ -37,7 +35,7 @@ function App(){
       setLoggedInStatus(userData.logged_in)
       console.log('logged in status from db',userData.logged_in)
       console.log('state of login',loggedInStatus)
-      if (path =='/auth/login' || path == '/auth/registration'){
+      if (path === '/auth/login' || path === '/auth/registration'){
         navigate('/')
       }
       else{
@@ -75,7 +73,7 @@ function App(){
     return (
       <div className="App">
         <nav>
-        {loggedInStatus==true?
+        {loggedInStatus === true?
           <>
             <h4>Logged In</h4>
             <Link to="/characters">Characters</Link>
