@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 
 class Home extends Component {
-  constructor(){
-    super();
-  }
-
-    componentDidMount(){
-      this.props.fetchUser('/');
+  componentDidMount(){
+    this.props.fetchUser('/');
   }
   
   render() {

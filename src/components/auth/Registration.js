@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const registrationsURL = "http://localhost:3000/registrations"
 
-export default class extends Component {
+export default class Registration extends Component {
     constructor(props){
         super(props)
         this.state={
