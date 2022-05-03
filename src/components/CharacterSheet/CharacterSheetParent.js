@@ -69,7 +69,10 @@ class CharacterSheetParent extends Component{
 
     }
 
+
     componentDidMount() {
+        this.props.fetchUser('/charactersheet/*');
+        console.log(this.props)
         const fetchData = URL => {
             // data from character table
             axios(URL.character).then(response => {

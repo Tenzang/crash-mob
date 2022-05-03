@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import CharacterCard from './CharacterCard';
 
-const sourceURL = 'http://localhost:3000';
+const sourceURL = 'http://localhost:3000/characters.json';
 
 class CharacterIndexParent extends Component{
     constructor() {
@@ -19,18 +19,21 @@ class CharacterIndexParent extends Component{
         this.props.fetchUser();
 
         // Fetch Characters
-        axios(sourceURL + '/characters.json').then(response => {
+        axios(sourceURL, {withCredentials:true}).then(response => {
             const characters = response.data;
             this.setState({ characters: characters });
         });
     }
+
+   handleDelete(id){
+        axios.delete(`http://localhost:3000/characters/${id}.json`).then((response)=>console.log(response))
+   }
 
     render(){
         return(
            
             <div>
                 <nav><Link to="/charactersheet">Character Sheet </Link></nav>
-                
                 <CharacterCard characters={ this.state.characters } />
             </div>
         )
