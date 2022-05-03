@@ -58,17 +58,6 @@ class Race extends Component {
                         </Select>
                         <br/>
 
-                        <p>Race Name</p>
-                        <p>
-                            Race info
-                        </p>
-                        <p>Subrace Name</p>
-                        <p>
-                            Subrace info
-                        </p>
-
-                        <br/>
-
                         <Button
                             color="secondary"
                             variant="contained"
