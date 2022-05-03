@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Abilities from "./Abilities";
 
 import Name from "./Name";
 import Race from "./Race";
@@ -22,9 +23,19 @@ class NewCharacterParent extends Component{
             name: '',
             race: '',
             role: '',
-            level: ''
+            level: '',
+            abilities: {
+                strength: 0,
+                dexterity: 0,
+                constitution: 0,
+                intelligence: 0,
+                wisdom: 0,
+                charisma: 0
+            },
         }
-    };
+    
+        };
+    
 
     // Proceed to next step
     nextStep = () => {
@@ -46,11 +57,15 @@ class NewCharacterParent extends Component{
     handleChange = input => event => {
         this.setState({ [input]: event.target.value });
     };
+
+    setScores = abilities => this.setState({ abilities: abilities });
     
     render(){
         const { step } = this.state;
-        const { name, race, role, level } = this.state;
-        const values = { name, race, role, level};
+        const { name, race, role, level, abilities } = this.state;
+        const values = { name, race, role, level, abilities};
+        
+ 
 
         switch(step) {
             case 1:
@@ -91,9 +106,16 @@ class NewCharacterParent extends Component{
                 );
             case 5:
                 return(
-                    <h1>End of form</h1>
+                    
+                    <Abilities
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        setScores={this.setScores}
+                        values={values}
+                    />
                 );
+            case 6:
         }
-    }
+    };
 }
 export default NewCharacterParent;
