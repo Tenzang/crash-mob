@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
+import SkillProficiencies from "./Skill Proficiencies";
 // import Level from "./Level";
 
 // import Scores from './Scores';
@@ -76,6 +77,17 @@ class NewCharacterParent extends Component{
                     />
                 );
             case 4:
+                return(
+                    <SkillProficiencies
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                        race={this.state.race}
+                        role={this.state.role}
+                    />
+                );
+            case 5:
                 return(
                     <h1>End of form</h1>
                 );
