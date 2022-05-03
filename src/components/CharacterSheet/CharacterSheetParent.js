@@ -51,7 +51,7 @@ class CharacterSheetParent extends Component{
                 survival: { proficient: false, ability: 'wisdom' },
             },
             proficiencyMod: 2,
-            URL: {character: `${sourceURL}/characters/${characterID}.json`, score: `${sourceURL}/scores/${characterID}.json` },
+            URL: {character: `${sourceURL}/characters/${characterID}.json`, score: `${sourceURL}/scores/${characterID}.json`, skills: `${sourceURL}/skills/${characterID}.json`, abilities: `${sourceURL}/abilities/${characterID}.json` },
             name: "???",
             race: "???",
             role: "???",
@@ -91,7 +91,62 @@ class CharacterSheetParent extends Component{
                 }
                 this.setState(newAbilities);
             });
-            // TODO: data from proficiency tables
+           // TODO: data from proficiency tables
+           // data from skill table
+            axios(URL.skills).then(response => {
+                const{ data } = response
+                console.log(data)
+                const newSkills = { skills: {  
+                acrobatics: { proficient: false, ability: 'dexterity' },
+                animalHandling: { proficient: false, ability: 'wisdom' },
+                arcana: { proficient: false, ability: 'intelligence' },
+                athletics: { proficient: false, ability: 'strength' },
+                deception: { proficient: false, ability: 'charisma' },
+                history: { proficient: false, ability: 'intelligence' },
+                insight: { proficient: false, ability: 'wisdom' },
+                intimidation: { proficient: false, ability: 'charisma' },
+                investigation: { proficient: false, ability: 'intelligence' },
+                medicine: { proficient: false, ability: 'wisdom' },
+                nature: { proficient: false, ability: 'intelligence' },
+                perception: { proficient: false, ability: 'wisdom' },
+                performance: { proficient: false, ability: 'charisma' },
+                persuasion: { proficient: false, ability: 'charisma' },
+                religion: { proficient: false, ability: 'intelligence' },
+                sleightOfHand: { proficient: false, ability: 'dexterity' },
+                stealth: { proficient: false, ability: 'dexterity' },
+                survival: { proficient: false, ability: 'wisdom' }, } 
+            }
+                
+                data.forEach(skills => newSkills.skills[skills].proficient = true )
+                console.log(newSkills);
+                this.setState(newSkills);
+            })
+            
+            axios(URL.abilities).then(response => {
+                const { data } = response 
+                console.log(data); 
+                const newProfs = { saveProfs: {
+                    strength: false,
+                    dexterity: false,
+                    constitution: false,
+                    intelligence: false,
+                    wisdom: false,
+                    charisma: false } 
+                } 
+                data.forEach(ability => newProfs.saveProfs[ability] = true)
+                console.log(newProfs);
+                this.setState(newProfs)
+            
+           
+
+                
+
+            })
+            
+
+        
+        // when you set state data should look like this : 
+        // { abilities: ['Athletics', 'Persuasion', 'Stealth'] }
         }
 
         fetchData(this.state.URL);
