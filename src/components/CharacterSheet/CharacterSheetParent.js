@@ -14,8 +14,6 @@ import { Button } from "@material-ui/core";
 
 
 const sourceURL = 'http://localhost:3000';
-let characterID = window.location.href;
-characterID = characterID[characterID.length-1];
 
 const modifier = score => Math.floor((score - 10) / 2);
 
@@ -25,12 +23,12 @@ class CharacterSheetParent extends Component{
 
         this.state = {
             abilities: { // will update with data from SERVER
-                strength: { score: 0, modifier: modifier(11) },
-                dexterity: { score: 0, modifier: modifier(14) },
-                constitution: { score: 0, modifier: modifier(18) },
-                intelligence: { score: 0, modifier: modifier(14) },
-                wisdom: { score: 0, modifier: modifier(7) },
-                charisma: { score: 0, modifier: modifier(18) }
+                strength: { score: 10, modifier: modifier(11) },
+                dexterity: { score: 10, modifier: modifier(14) },
+                constitution: { score: 10, modifier: modifier(18) },
+                intelligence: { score: 10, modifier: modifier(14) },
+                wisdom: { score: 10, modifier: modifier(7) },
+                charisma: { score: 10, modifier: modifier(18) }
             },
             skills: {
                 acrobatics: { proficient: false, ability: 'dexterity' },
@@ -53,7 +51,7 @@ class CharacterSheetParent extends Component{
                 survival: { proficient: false, ability: 'wisdom' },
             },
             proficiencyMod: 2,
-            URL: {character: `${sourceURL}/characters/${characterID}.json`, score: `${sourceURL}/scores/${characterID}.json`, skills: `${sourceURL}/skills/${characterID}.json`, abilities: `${sourceURL}/abilities/${characterID}.json` },
+            URL: {character: `${sourceURL}/characters/`, score: `${sourceURL}/scores/`, skills: `${sourceURL}/skills/`, abilities: `${sourceURL}/abilities/` },
             name: "???",
             race: "???",
             role: "???",
@@ -73,11 +71,15 @@ class CharacterSheetParent extends Component{
 
 
     componentDidMount() {
-        this.props.fetchUser('/charactersheet/*');
+        let characterID = window.location.href;
+        characterID = characterID[characterID.length-1];
+        console.log("making request with characterID = ", characterID);
+        this.props.fetchUser('/charactersheet/' + characterID);
         console.log(this.props)
         const fetchData = URL => {
             // data from character table
-            axios(URL.character).then(response => {
+            axios(URL.character + characterID + ".json").then(response => {
+                console.log("character data requested:")
                 console.log(response);
                 const { data } = response;
                 const newState = {};
@@ -87,7 +89,8 @@ class CharacterSheetParent extends Component{
                 this.setState(newState);
             });
             // data from score table
-            axios(URL.score).then(response => {
+            axios(URL.score + characterID + ".json").then(response => {
+                console.log("score data requested:")
                 console.log(response);
                 const { data } = response
                 const newAbilities = { abilities: {} }
@@ -98,37 +101,39 @@ class CharacterSheetParent extends Component{
             });
            // TODO: data from proficiency tables
            // data from skill table
-            axios(URL.skills).then(response => {
+            axios(URL.skills + characterID + ".json").then(response => {
                 const{ data } = response
-                console.log(data)
                 const newSkills = { skills: {  
-                acrobatics: { proficient: false, ability: 'dexterity' },
-                animalHandling: { proficient: false, ability: 'wisdom' },
-                arcana: { proficient: false, ability: 'intelligence' },
-                athletics: { proficient: false, ability: 'strength' },
-                deception: { proficient: false, ability: 'charisma' },
-                history: { proficient: false, ability: 'intelligence' },
-                insight: { proficient: false, ability: 'wisdom' },
-                intimidation: { proficient: false, ability: 'charisma' },
-                investigation: { proficient: false, ability: 'intelligence' },
-                medicine: { proficient: false, ability: 'wisdom' },
-                nature: { proficient: false, ability: 'intelligence' },
-                perception: { proficient: false, ability: 'wisdom' },
-                performance: { proficient: false, ability: 'charisma' },
-                persuasion: { proficient: false, ability: 'charisma' },
-                religion: { proficient: false, ability: 'intelligence' },
-                sleightOfHand: { proficient: false, ability: 'dexterity' },
-                stealth: { proficient: false, ability: 'dexterity' },
-                survival: { proficient: false, ability: 'wisdom' }, } 
+                Acrobatics: { proficient: false, ability: 'dexterity' },
+                AnimalHandling: { proficient: false, ability: 'wisdom' },
+                Arcana: { proficient: false, ability: 'intelligence' },
+                Athletics: { proficient: false, ability: 'strength' },
+                Deception: { proficient: false, ability: 'charisma' },
+                History: { proficient: false, ability: 'intelligence' },
+                Insight: { proficient: false, ability: 'wisdom' },
+                Intimidation: { proficient: false, ability: 'charisma' },
+                Investigation: { proficient: false, ability: 'intelligence' },
+                Medicine: { proficient: false, ability: 'wisdom' },
+                Nature: { proficient: false, ability: 'intelligence' },
+                Perception: { proficient: false, ability: 'wisdom' },
+                Performance: { proficient: false, ability: 'charisma' },
+                Persuasion: { proficient: false, ability: 'charisma' },
+                Religion: { proficient: false, ability: 'intelligence' },
+                SleightOfHand: { proficient: false, ability: 'dexterity' },
+                Stealth: { proficient: false, ability: 'dexterity' },
+                Survival: { proficient: false, ability: 'wisdom' }, } 
             }
                 
-                data.forEach(skills => newSkills.skills[skills].proficient = true )
+                data.forEach(skill => {
+                    console.log(skill);
+                    newSkills.skills[skill].proficient = true} )
                 console.log(newSkills);
                 this.setState(newSkills);
             })
             
-            axios(URL.abilities).then(response => {
+            axios(URL.abilities + characterID + ".json").then(response => {
                 const { data } = response 
+                console.log("abilities data requested:")
                 console.log(data); 
                 const newProfs = { saveProfs: {
                     strength: false,
@@ -139,13 +144,7 @@ class CharacterSheetParent extends Component{
                     charisma: false } 
                 } 
                 data.forEach(ability => newProfs.saveProfs[ability] = true)
-                console.log(newProfs);
-                this.setState(newProfs)
-            
-           
-
-                
-
+                this.setState(newProfs)                 
             })
             
 

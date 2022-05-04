@@ -16,32 +16,28 @@ class Name extends Component {
     render() {
         const { values, handleChange } = this.props;
         return (
-            <MuiThemeProvider>
-                <>
-                    <Dialog
-                        open
-                        fullWidth
-                        maxWidth='sm'
-                    >
-                        <AppBar title="Character Name" />
-                        <h2>Character Name</h2>
-                        <TextField
-                            placeholder="Enter Your Character's Name"
-                            label="Character Name"
-                            onChange={handleChange('name')}
-                            defaultValue={values.name}
-                            margin="normal"
-                            fullWidth
-                        />
-                        <br/>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={this.continue}
-                        >Continue</Button>
-                    </Dialog>
-                </>
-            </MuiThemeProvider>
+            <Dialog
+                open
+                fullWidth
+                maxWidth='sm'
+            >
+                <AppBar title="Character Name" />
+                <h2>Character Name</h2>
+                <TextField
+                    placeholder="Enter Your Character's Name"
+                    label="Character Name"
+                    onChange={handleChange('name')}
+                    defaultValue={values.name}
+                    margin="normal"
+                    fullWidth
+                />
+                <br/>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={this.continue}
+                >Continue</Button>
+            </Dialog>
         );
     }
 }

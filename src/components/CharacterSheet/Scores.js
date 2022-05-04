@@ -5,7 +5,7 @@ function Scores(props) {
 
         <div>
             { Object.keys(abilities).map(abilityName => { return (
-                <div>
+                <div key={abilityName}>
                     { abilityName }
                     { abilities[abilityName].score }
 

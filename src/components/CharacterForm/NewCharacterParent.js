@@ -5,6 +5,7 @@ import axios from "axios";
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
+import CharacterSubmit from "./CharacterSubmit";
 import Level from "./Level";
 import Details from "./Details";
 import Languages from "./Languages";
@@ -25,18 +26,18 @@ class NewCharacterParent extends Component{
 
         this.state = {
             step: 1,
-            name: '',
-            race: '',
-            role: '',
-            level: '',
-            abilities: {
-                strength: 0,
-                dexterity: 0,
-                constitution: 0,
-                intelligence: 0,
-                wisdom: 0,
-                charisma: 0
-            },
+            name: 'Poobert',
+            race: 'Human',
+            role: `Fighter`,
+            level: '1',
+            abilities: [ 
+                10,
+                10,
+                10,
+                10,
+                10,
+                10
+            ],
             languages: [],
             personality: '',
             ideals: '',
@@ -69,8 +70,14 @@ class NewCharacterParent extends Component{
     handleChange = input => event => {
         this.setState({ [input]: event.target.value });
     };
-
-    setScores = abilities => this.setState({ abilities: abilities });
+    
+    setScores = (event) => {
+        const {name, value} = event.target;
+        console.log(name);
+        let newAbilities = [...this.state.abilities];
+        newAbilities[name] = value;
+        this.setState( { abilities: newAbilities } );
+    };
     
     createNewCharacter(){
         console.log('this is the state',this.state)
@@ -134,8 +141,12 @@ class NewCharacterParent extends Component{
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
                         setScores={this.setScores}
-                        values={values}
+                        abilities={values.abilities}
                     />
+                );
+            case 5:
+                return(
+                    <CharacterSubmit character={this.state} />
                 );
             case 6:
                 return(

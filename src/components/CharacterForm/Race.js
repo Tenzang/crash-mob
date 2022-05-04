@@ -36,44 +36,40 @@ class Race extends Component {
     render(){
         const { values, handleChange } = this.props;
         return(
-            <MuiThemeProvider>
-                <>
-                    <Dialog
-                        open
-                        fullWidth
-                        maxWidth='sm'
-                    >
-                        <AppBar title="Character Race" />
-                        <h2>Character Race</h2>
-                        <Select
-                            placeholder="Choose your Character's Race"
-                            label= "Character Race"
-                            onChange={handleChange('race')}
-                            defaultValue={values.race}
-                            margin="normal"
-                            fullWidth
-                        >
-                                {this.state.races.map( ( {name} ) => {
-                                return <MenuItem value={name}>{name}</MenuItem>})}
-                        </Select>
-                        <br/>
+            <Dialog
+                open
+                fullWidth
+                maxWidth='sm'
+            >
+                <AppBar title="Character Race" />
+                <h2>Character Race</h2>
+                <Select
+                    placeholder="Choose your Character's Race"
+                    label= "Character Race"
+                    onChange={handleChange('race')}
+                    defaultValue={values.race}
+                    margin="normal"
+                    fullWidth
+                >
+                        {this.state.races.map( ( {name}, index ) => {
+                        return <MenuItem key={index} value={name}>{name}</MenuItem>})}
+                </Select>
+                <br/>
 
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            onClick={this.back}
-                        >Back</Button>
-                        <br/>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={this.continue}
-                        >Continue</Button>
-                        
-                    </Dialog>
-                </>
-            </MuiThemeProvider>
-        )
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={this.back}
+                >Back</Button>
+                <br/>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={this.continue}
+                >Continue</Button>
+                
+            </Dialog>
+        );
     }
 };
 

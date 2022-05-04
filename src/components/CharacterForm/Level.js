@@ -23,8 +23,6 @@ class Level extends Component {
     render(){
         const { values, handleChange } = this.props;
         return(
-            <MuiThemeProvider>
-            <>
                 <Dialog
                     open
                     fullWidth
@@ -36,6 +34,7 @@ class Level extends Component {
                         <Select
                             label="Level"
                             onChange={handleChange('level')}
+                            value={this.props.values.level}
                         >
                             <MenuItem value={1}>One</MenuItem>
                             <MenuItem value={2}>Two</MenuItem>
@@ -71,8 +70,6 @@ class Level extends Component {
                         onClick={this.continue}
                     >Continue</Button>
                 </Dialog>
-            </>
-        </MuiThemeProvider>
             // <label> Level
             //     <input type="number" required min="1" max="20" placeholder="1" />
             // </label>

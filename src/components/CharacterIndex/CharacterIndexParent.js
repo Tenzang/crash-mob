@@ -15,7 +15,7 @@ class CharacterIndexParent extends Component{
         }
     }
         
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchUser();
 
         // Fetch Characters
@@ -33,7 +33,6 @@ class CharacterIndexParent extends Component{
         return(
            
             <div>
-                <nav><Link to="/charactersheet">Character Sheet </Link></nav>
                 <CharacterCard characters={ this.state.characters } />
             </div>
         )
