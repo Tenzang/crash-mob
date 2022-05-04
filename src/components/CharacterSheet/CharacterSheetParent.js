@@ -11,7 +11,6 @@ import SavingThrows from "./SavingThrows";
 import Health from "./Health";
 import { Button } from "@material-ui/core";
 
-
 const sourceURL = 'http://localhost:3000';
 
 const modifier = score => Math.floor((score - 10) / 2);
@@ -68,7 +67,6 @@ class CharacterSheetParent extends Component{
         };
 
     }
-
 
     componentDidMount() {
         let characterID = window.location.href;
@@ -175,9 +173,8 @@ class CharacterSheetParent extends Component{
 
                 <Health abilities={ abilities } hitpoints={ hitpoints } level={ level } hitDice={ hitDice } />
 
-                    <Button variant="contained" size="small" color="primary">Edit</Button>
-                   
-            
+                <Button variant="contained" size="small" color="primary">Edit</Button>
+                
             </div>
         );
     }
