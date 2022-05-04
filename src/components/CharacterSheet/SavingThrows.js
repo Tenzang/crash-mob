@@ -3,7 +3,7 @@ function SavingThrows(props) {
     return(
         <div>
             { Object.keys(abilities).map( abilityName => { return (
-                <div>
+                <div key={abilityName}>
                     { abilityName }
                     { abilities[abilityName].modifier + ( saveProfs[abilityName] * proficiency ) >= 0 ? '+' : ''}
                     { abilities[abilityName].modifier + ( saveProfs[abilityName] * proficiency )}

@@ -13,7 +13,7 @@ class CharacterIndexParent extends Component{
         this.getCharacterid = this.getCharacterid.bind(this)
     }
         
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchUser();
 
         // Fetch Characters

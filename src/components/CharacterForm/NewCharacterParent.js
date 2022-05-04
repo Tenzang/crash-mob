@@ -4,6 +4,11 @@ import Abilities from "./Abilities";
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
+import CharacterSubmit from "./CharacterSubmit";
+import Level from "./Level";
+import Details from "./Details";
+import Languages from "./Languages";
+import Equipment from "./Equipment";
 // import Level from "./Level";
 
 // import Scores from './Scores';
@@ -22,6 +27,7 @@ class NewCharacterParent extends Component{
             name: '',
             race: '',
             role: '',
+            level: '',
             abilities: {
                 strength: 0,
                 dexterity: 0,
@@ -30,8 +36,15 @@ class NewCharacterParent extends Component{
                 wisdom: 0,
                 charisma: 0
             },
+            languages: [],
+            personality: '',
+            ideals: '',
+            bonds: '',
+            flaws: ''
+        }
+    
         };
-    };
+    
 
     // Proceed to next step
     nextStep = () => {
@@ -58,8 +71,8 @@ class NewCharacterParent extends Component{
     
     render(){
         const { step } = this.state;
-        const { name, race, role, abilities } = this.state;
-        const values = { name, race, role, abilities };
+        const { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws } = this.state;
+        const values = { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws };
 
         switch(step) {
             case 1:
@@ -90,6 +103,16 @@ class NewCharacterParent extends Component{
                 );
             case 4:
                 return(
+                    <Level
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
+                );
+            case 5:
+                return(
+                    
                     <Abilities
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
@@ -98,7 +121,39 @@ class NewCharacterParent extends Component{
                     />
                 );
             case 5:
+                return(
+                    <CharacterSubmit character={this.state} />
+                );
+            case 6:
+                return(
+                <Details
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
+                );
+            case 7:
+                return(
+                    <Languages
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
+                )
+            case 8:
+                    return(
+                        <Equipment
+
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange={this.handleChange}
+                            values={values}
+                    />
+                )
+
         }
-    }
+    };
 }
 export default NewCharacterParent;
