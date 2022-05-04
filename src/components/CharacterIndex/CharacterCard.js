@@ -1,4 +1,4 @@
-import {Link } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -6,7 +6,9 @@ import CardContent from '@material-ui/core/CardContent';
 import { IconButton, Typography, Button, Grid } from '@material-ui/core'
 import { DeleteOutlined } from '@material-ui/icons';
 
+
 function CharacterCard(props) {
+    const navigate = useNavigate();
     return (
         <div>
             <Grid>
@@ -35,7 +37,7 @@ function CharacterCard(props) {
                                     <h4>Character Role: { character.role }</h4>
                                 </Typography>
                             </CardContent>
-                        <Button variant="contained" color="primary" style={btnStyle}> { character.name }</Button>
+                        <Button variant="contained" color="primary" onClick={()=>navigate(`/charactersheet/${character.id}`)} style={btnStyle}> { character.name }</Button>
                         </Grid>
                         </Card>
                     </div>
