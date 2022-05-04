@@ -4,6 +4,8 @@ import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
 import SkillProficiencies from "./Skill Proficiencies";
+import Details from "./Details";
+import Languages from "./Languages";
 // import Level from "./Level";
 
 // import Scores from './Scores';
@@ -19,7 +21,15 @@ class NewCharacterParent extends Component{
             step: 1,
             name: '',
             race: '',
-            role: ''
+            role: '',
+            languages: [],
+            personality: '',
+            ideals: '',
+            bonds: '',
+            flaws: '',
+            proficiency_choices: []
+            //proficiency_choices_2: []
+
         }
     };
 
@@ -46,8 +56,8 @@ class NewCharacterParent extends Component{
     
     render(){
         const { step } = this.state;
-        const { name, race, role } = this.state;
-        const values = { name, race, role };
+        const { name, race, role, languages, personality, ideals, bonds, flaws, proficiency_choices } = this.state;
+        const values = { name, race, role, languages, personality, ideals, bonds, flaws, proficiency_choices };
 
         switch(step) {
             case 1:
@@ -78,16 +88,32 @@ class NewCharacterParent extends Component{
                 );
             case 4:
                 return(
+                    <Languages
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
+                );
+            case 5:
+                return(
+                    <Details
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                    />
+                );
+            case 6:
+                return(
                     <SkillProficiencies
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
                         handleChange={this.handleChange}
                         values={values}
-                        race={this.state.race}
-                        role={this.state.role}
                     />
                 );
-            case 5:
+            case 7:
                 return(
                     <h1>End of form</h1>
                 );
