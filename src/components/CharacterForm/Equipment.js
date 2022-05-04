@@ -65,8 +65,13 @@ class Equipment extends Component{
                         <Button
                             color="primary"
                             variant="contained"
-                            onClick={this.continue}
+                            onClick={ (event)=> {
+                                this.props.getHitDice()
+                                this.continue(event)
+                            }}
+
                         >Continue</Button>
+                         
                     </Dialog>
                 </>
             </MuiThemeProvider>

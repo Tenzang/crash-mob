@@ -10,6 +10,8 @@ import Scores from './Scores';
 import Skills from "./Skills";
 import SavingThrows from "./SavingThrows";
 import Health from "./Health";
+import { Button } from "@material-ui/core";
+
 
 const sourceURL = 'http://localhost:3000';
 let characterID = window.location.href;
@@ -154,6 +156,9 @@ class CharacterSheetParent extends Component{
 
         fetchData(this.state.URL);
     }
+    createNewCharacter(){
+        console.log('createnew');
+    }
 
     render(){
         const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice } = this.state;
@@ -170,8 +175,13 @@ class CharacterSheetParent extends Component{
                 <Skills abilities={ abilities } skills={ skills } proficiency={ proficiencyMod } />
 
                 <Health abilities={ abilities } hitpoints={ hitpoints } level={ level } hitDice={ hitDice } />
+
+                    <Button variant="contained" size="small" color="primary">Edit</Button>
+                   
+            
             </div>
         );
     }
+   
 }
 export default CharacterSheetParent;

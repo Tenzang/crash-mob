@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Abilities from "./Abilities";
+import axios from "axios";
 
 import Name from "./Name";
 import Race from "./Race";
@@ -8,6 +9,7 @@ import Level from "./Level";
 import Details from "./Details";
 import Languages from "./Languages";
 import Equipment from "./Equipment";
+import ReviewCharacter from "./ReviewCharacter";
 // import Level from "./Level";
 
 // import Scores from './Scores';
@@ -41,6 +43,8 @@ class NewCharacterParent extends Component{
             bonds: '',
             flaws: ''
         }
+        this.createNewCharacter=this.createNewCharacter.bind(this);
+        this.getHitDice = this.getHitDice.bind(this);
     
         };
     
@@ -68,6 +72,20 @@ class NewCharacterParent extends Component{
 
     setScores = abilities => this.setState({ abilities: abilities });
     
+    createNewCharacter(){
+        console.log('this is the state',this.state)
+    axios.post('http://localhost:3000/characters',this.state, {withCredentials: true}).then(response=>console.log(response)).catch(error=>{console.log(error)})
+
+    }
+
+    getHitDice(){
+        axios.get(`https://www.dnd5eapi.co/api/classes/${this.state.role.toLowerCase()}`).then( response => { 
+            const hd = response.data.hit_die
+            this.setState({hit_dice: hd})
+           
+    })
+    }
+
     render(){
         const { step } = this.state;
         const { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws } = this.state;
@@ -140,13 +158,24 @@ class NewCharacterParent extends Component{
             case 8:
                     return(
                         <Equipment
-
+                            createNewCharacter={this.createNewCharacter}
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange={this.handleChange}
+                            values={values}
+                            getHitDice = {this.getHitDice}
+                    />
+                )
+                case 9:
+                    return(
+                        <ReviewCharacter
+                            createNewCharacter={this.createNewCharacter}
                             nextStep={this.nextStep}
                             prevStep={this.prevStep}
                             handleChange={this.handleChange}
                             values={values}
                     />
-                )
+                    )
 
         }
     };
