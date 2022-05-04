@@ -145,9 +145,7 @@ class NewCharacterParent extends Component{
                     <Level
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
-                        // handleChange={this.handleChange}
-                        handleLanguageChange={this.handleLanguageChange}
-                        knownLanguage={this.knownLanguage}
+                        handleChange={this.handleChange}
                         values={values}
                     />
                 );
@@ -179,7 +177,8 @@ class NewCharacterParent extends Component{
                     <Languages
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
-                        handleChange={this.handleChange}
+                        handleLanguageChange={this.handleLanguageChange}
+                        knownLanguage={this.knownLanguage}
                         values={values}
                     />
                 )
