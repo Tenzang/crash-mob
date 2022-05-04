@@ -46,8 +46,9 @@ class NewCharacterParent extends Component{
         }
         this.createNewCharacter=this.createNewCharacter.bind(this);
         this.getHitDice = this.getHitDice.bind(this);
+        this.knownLanguage=this.knownLanguage.bind(this);
     
-        };
+    };
     
 
     // Proceed to next step
@@ -69,7 +70,21 @@ class NewCharacterParent extends Component{
     // Handle fields change
     handleChange = input => event => {
         this.setState({ [input]: event.target.value });
+        
     };
+
+    // Helper functions for known languages
+    knownLanguage = (languages) => {
+        this.setState({languages: languages})
+    }
+
+    // Helper function to join known languages with chosen languages
+    handleLanguageChange = input => event => {
+        console.log('changing languages')
+        console.log(event)
+        this.setState({languages: [...this.state.languages, event.target.value]})
+    };
+
     
     setScores = (event) => {
         const {name, value} = event.target;
@@ -130,7 +145,9 @@ class NewCharacterParent extends Component{
                     <Level
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
-                        handleChange={this.handleChange}
+                        // handleChange={this.handleChange}
+                        handleLanguageChange={this.handleLanguageChange}
+                        knownLanguage={this.knownLanguage}
                         values={values}
                     />
                 );

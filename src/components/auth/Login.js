@@ -57,6 +57,7 @@ export default class Login extends Component {
     const paperStyle = {padding :20, height: 500, width:340, margin: '10% auto'}
     const avatarStyle = {backgroundColor:'#3DDC97'}
     const btnstyle = {margin:'20px 0'}
+    
     return (
         <div>
             <Grid>
@@ -83,3 +84,6 @@ export default class Login extends Component {
     )
   }
 }
+
+
+// onClick 
