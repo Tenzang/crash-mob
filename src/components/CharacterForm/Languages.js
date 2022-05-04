@@ -4,15 +4,18 @@ import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Select from "@material-ui/core/Select";
-import { MenuItem } from "@material-ui/core";
 
-class Race extends Component {
+
+class Languages extends Component {
     constructor(props){
         super(props);
+
         this.state = {
-            races: []
-        }
+            race: props.values.race,
+            language_desc: '',
+            language_options: [],
+            languages: []
+        };
     }
 
     continue = event => {
@@ -26,16 +29,23 @@ class Race extends Component {
     };
 
     componentDidMount() {
-        axios.get(`https://www.dnd5eapi.co/api/races`)
+        axios.get('https://www.dnd5eapi.co/api/races/' + this.state.race.toLowerCase())
         .then(res => {
-            const races = res.data.results;
-            this.setState({ races });
+            // console.log(res.data.language_desc)
+            const language_desc = res.data.language_desc;
+            this.setState({ language_desc });
+
+            const language_options = res.data.language_options;
+            this.setState({ language_options });
+
+            const languages = res.data.languages.name;
+            this.setState({ languages })
         })
     }
 
-    render(){
+    render() {
         const { values, handleChange } = this.props;
-        return(
+        return (
             <MuiThemeProvider>
                 <>
                     <Dialog
@@ -43,38 +53,26 @@ class Race extends Component {
                         fullWidth
                         maxWidth='sm'
                     >
-                        <AppBar title="Character Race" />
-                        <h2>Character Race</h2>
-                        <Select
-                            placeholder="Choose your Character's Race"
-                            label= "Character Race"
-                            onChange={handleChange('race')}
-                            defaultValue={values.race}
-                            margin="normal"
-                            fullWidth
-                        >
-                                {this.state.races.map( ( {name}, index ) => {
-                                return <MenuItem key={index} value={name}>{name}</MenuItem>})}
-                        </Select>
+                        <AppBar title="Character Languages" />
+                        <h2>Character Languages</h2>
+                        <p>{this.state.language_desc}</p>
                         <br/>
-
                         <Button
                             color="secondary"
                             variant="contained"
                             onClick={this.back}
                         >Back</Button>
-                        <br/>
+
                         <Button
                             color="primary"
                             variant="contained"
                             onClick={this.continue}
                         >Continue</Button>
-                        
                     </Dialog>
                 </>
             </MuiThemeProvider>
-        )
+        );
     }
-};
+}
 
-export default Race;
+export default Languages;
