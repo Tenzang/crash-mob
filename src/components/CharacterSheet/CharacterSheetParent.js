@@ -1,19 +1,20 @@
 import React, {Component} from "react";
 import axios from 'axios';
-
+import _ from 'lodash';
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
 import Level from "./Level";
-
 import Scores from './Scores';
 import Skills from "./Skills";
 import SavingThrows from "./SavingThrows";
 import Health from "./Health";
 
 const sourceURL = 'http://localhost:3000';
-let characterID = window.location.href;
-characterID = characterID[characterID.length-1];
+
+// const characterID =window.location.href.slice(_.findLastIndex(window.location.href.split(''), c=> c==='/')+1)
+const characterID = 9
+// console.log(characterID)
 
 const modifier = score => Math.floor((score - 10) / 2);
 
@@ -22,6 +23,7 @@ class CharacterSheetParent extends Component{
         super();
 
         this.state = {
+            characterId: "",
             abilities: { // will update with data from SERVER
                 strength: { score: 0, modifier: modifier(11) },
                 dexterity: { score: 0, modifier: modifier(14) },
@@ -71,12 +73,12 @@ class CharacterSheetParent extends Component{
 
 
     componentDidMount() {
-        this.props.fetchUser('/charactersheet/*');
+        // this.props.fetchUser(`/charactersheet/${characterID}`);
         console.log(this.props)
         const fetchData = URL => {
             // data from character table
-            axios(URL.character).then(response => {
-                console.log(response);
+            axios(URL.character, {withCredentials: true}).then((response) => {
+                console.log(characterID);
                 const { data } = response;
                 const newState = {};
                 for (const key in data) {

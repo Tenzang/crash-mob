@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate} from "react-router-dom";
 import CharacterIndexParent from "./CharacterIndex/CharacterIndexParent";
 import Home from './Home'
@@ -25,6 +25,7 @@ function App(){
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   const navPages =[{name: "Home", path: '/'},{name: "Characters", path: '/characters'}, {name:"New Character", path:'/newcharacter'}]
+  const [characterId, setCharacterId] = useState(null);
 
 
   const navigate = useNavigate();
@@ -84,6 +85,8 @@ function App(){
     console.log('redirecting to login')
     navigate('/auth/login', data)
   }
+
+
   const appbarStyle = {backgroundColor:'#D00000'}
   const tabStyle = {marginLeft: 'auto'}
   const loginStyle = {marginLeft: 'auto' }
@@ -143,7 +146,7 @@ function App(){
               <Route path="/auth/login" element={<><Login fetchUser={checkLogin} handleSuccessfulAuth={loggedIn} /></>}/>
               <Route path="/characters" element={<><CharacterIndexParent fetchUser={checkLogin} /></>}/>
               <Route path="/newcharacter" element={<><NewCharacterParent fetchUser={checkLogin} /></>}/>
-              <Route path="/charactersheet/*" element={<><CharacterSheetParent fetchUser={checkLogin} /></>}/>
+              <Route path="/charactersheet/*"  element={<><CharacterSheetParent characterId={characterId} fetchUser={checkLogin} /></>}/>
           </Routes>
       </div>
     );
