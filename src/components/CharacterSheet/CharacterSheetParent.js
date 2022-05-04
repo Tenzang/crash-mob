@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import axios from 'axios';
-
+import _ from 'lodash';
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
 import Level from "./Level";
-
 import Scores from './Scores';
 import Skills from "./Skills";
 import SavingThrows from "./SavingThrows";
@@ -22,6 +21,7 @@ class CharacterSheetParent extends Component{
         super();
 
         this.state = {
+            characterId: "",
             abilities: { // will update with data from SERVER
                 strength: { score: 10, modifier: modifier(11) },
                 dexterity: { score: 10, modifier: modifier(14) },
@@ -72,7 +72,7 @@ class CharacterSheetParent extends Component{
 
     componentDidMount() {
         let characterID = window.location.href;
-        characterID = characterID[characterID.length-1];
+        characterID = characterID.slice(-2)
         console.log("making request with characterID = ", characterID);
         this.props.fetchUser('/charactersheet/' + characterID);
         console.log(this.props)
