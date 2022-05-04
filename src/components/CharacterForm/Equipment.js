@@ -71,6 +71,7 @@ class Equipment extends Component{
                             }}
 
                         >Continue</Button>
+                        <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
                          
                     </Dialog>
                 </>

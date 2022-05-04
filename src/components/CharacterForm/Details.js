@@ -78,6 +78,7 @@ class Details extends Component {
                             variant="contained"
                             onClick={this.continue}
                         >Continue</Button>
+                        <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
                     </Dialog>
                 </>
             </MuiThemeProvider>

@@ -21,6 +21,7 @@ function ReviewCharacter(props){
                         >Back</Button>
                         <br/>
                          <Button onClick={()=> props.createNewCharacter()}>Create!</Button>
+                         
                     </Dialog>
                
         

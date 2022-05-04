@@ -105,6 +105,7 @@ class Abilities extends Component {
                         this.continue(event);
                     }}
                 >Continue</Button>
+                <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
                 
             </Dialog>
         );
