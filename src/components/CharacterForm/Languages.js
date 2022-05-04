@@ -15,7 +15,8 @@ class Languages extends Component {
             race: props.values.race,
             language_desc: '',
             language_options: [],
-            languages: []
+            languages: [],
+            language_choice: ''
         };
     }
 
@@ -32,23 +33,23 @@ class Languages extends Component {
     componentDidMount() {
         axios.get('https://www.dnd5eapi.co/api/races/' + this.state.race.toLowerCase())
         .then(res => {
-            console.log(res);
             const language_desc = res.data.language_desc;
             this.setState({ language_desc });
+
+            const languages = res.data.languages.map( ( {name} ) => name);
+            this.setState({ languages })
+            this.props.knownLanguage(languages)
 
             if(res.data.hasOwnProperty('language_options')){
                 const language_options = res.data.language_options.from;
                 this.setState({ language_options });
             }
 
-            const languages = res.data.languages;
-            this.setState({ languages })
-            console.log(languages)
         })
     }
 
     render() {
-        const { values, handleChange } = this.props;
+        const { values, handleLanguageChange } = this.props;
         return (
             <MuiThemeProvider>
                 <>
@@ -58,18 +59,17 @@ class Languages extends Component {
                         maxWidth='sm'
                     >
                         <AppBar title="Character Languages" />
-                        <h2>Character Languages</h2>
+                        <h2>Character Languages ({this.state.race})</h2>
                         <p>{this.state.language_desc}</p>
                         <br/>
                         <h3>Known Languages</h3>
-                        <p>{this.state.languages.map( ( {name} ) => {
-                                return <MenuItem value={name}>{name}</MenuItem>})}</p>
-                        +
+                        <p>{this.state.languages.map( ( language ) => {
+                                return <MenuItem value={language}>{language}</MenuItem>})}</p>
                         <h3>Extra Language</h3>
                         <Select
                             placeholder="Extra Language (Race)"
                             label= "Extra Language (Race)"
-                            onChange={handleChange('languages')}
+                            onChange={handleLanguageChange('languages')}
                             defaultValue={values.language_options}
                             margin="normal"
                             fullWidth
