@@ -97,7 +97,7 @@ class Abilities extends Component {
                         this.back(event);
                     }}
                 >Back</Button>
-
+                <br/>
                 <Button
                     color="primary"
                     variant="contained"
