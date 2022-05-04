@@ -7,6 +7,7 @@ function ReviewCharacter(props){
         event.preventDefault();
         props.prevStep();
     };
+    
     return(
 
                     <Dialog
@@ -20,7 +21,7 @@ function ReviewCharacter(props){
                             onClick={back}
                         >Back</Button>
                         <br/>
-                         <Button onClick={()=> props.createNewCharacter()}>Create!</Button>
+                         <Button onClick={()=> { props.createNewCharacter(); window.location.href='/characters';}}>Create!</Button>
                          
                     </Dialog>
                
