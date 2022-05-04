@@ -12,12 +12,14 @@ class Abilities extends Component {
         super(props);
 
         this.state = {
-            strength: props.values.abilities.strength,
-            dexterity: props.values.abilities.dexterity,
-            constitution: props.values.abilities.constitution,
-            intelligence: props.values.abilities.intelligence,
-            wisdom: props.values.abilities.wisdom,
-            charisma: props.values.abilities.charisma
+            abilities: [ 
+                { label: "strength", score: props.abilities[0] },
+                { label: "dexterity", score: props.abilities[1] },
+                { label: "constitution", score: props.abilities[2] },
+                { label: "intelligence", score: props.abilities[3] },
+                { label: "wisdom", score: props.abilities[4] },
+                { label: "charisma", score: props.abilities[5] }
+            ]
         };
 
         this.scoreUpdate = this.scoreUpdate.bind(this);
@@ -34,63 +36,77 @@ class Abilities extends Component {
     };
 
     scoreUpdate(event) {
-        const {ability, score} = event.target.value
-        this.setState( { [ability]: score } );
+        const score = event.target.value;
+        const index =  event.target.name;
+
+        const {abilities} = this.state;
+        let newState = {
+            abilities: [ 
+                { label: "strength", score: abilities[0].score },
+                { label: "dexterity", score: abilities[1].score },
+                { label: "constitution", score: abilities[2].score },
+                { label: "intelligence", score: abilities[3].score },
+                { label: "wisdom", score: abilities[4].score },
+                { label: "charisma", score: abilities[5].score }
+            ]
+        };
+
+        newState.abilities[index].score = score;
+        
+        this.setState( newState );
+        this.props.setScores( event );
     }    
 
     render() {
-        const { setScores, values } = this.props;
+        const { setScores } = this.props;
         return(
-            <MuiThemeProvider>
-                <>
-                    <Dialog
-                        open
-                        fullWidth
-                        maxWidth='sm'
-                    >
-                        <AppBar title="Abilities" />
-                        <h2>Choose your Abilities</h2>
-                        { Object.keys(this.state).map( ability => {
-                            return (
-                                <div>
-                                    {ability}:
-                                    {this.state[ability]}
-                                    <Select
-                                        onChange={this.scoreUpdate}
-                                    >
-                                        {[16, 15, 14, 13, 12, 10, 8].map((score, index) => {
-                                            return (
-                                                <MenuItem key={index} value={{ability: ability, score: score}}>{score}</MenuItem>
-                                            );
-                                        })}
-                                    </Select>
-                                </div>
-                            )
-                        })}
+            <Dialog
+                open
+                fullWidth
+                maxWidth='sm'
+            >
+                <AppBar title="Abilities" />
+                <h2>Choose your Abilities</h2>
 
-                        <br/>
+                { this.state.abilities.map( (ability, index) => {
+                    return (
+                        <div>
+                            {ability.label}
+                            <Select
+                                onChange={ this.scoreUpdate }
+                                value={ ability.score }
+                                name={index}
+                                key={index}
+                            >
+                                {[15, 14, 13, 12, 10, 8].map((score, index) => {
+                                    return (
+                                        <MenuItem key={ index } value={ score }>{ score }</MenuItem>
+                                    );
+                                })}
+                            </Select>
+                        </div>
+                    );
+                }) }
 
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            onClick={(event) => {
-                                setScores(this.state);
-                                this.back(event);
-                            }}
-                        >Back</Button>
+                <br/>
 
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={(event) => {
-                                setScores(this.state);
-                                this.continue(event);
-                            }}
-                        >Continue</Button>
-                        
-                    </Dialog>
-                </>
-            </MuiThemeProvider>
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={(event) => {
+                        this.back(event);
+                    }}
+                >Back</Button>
+
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={(event) => {
+                        this.continue(event);
+                    }}
+                >Continue</Button>
+                
+            </Dialog>
         );
     }
 }

@@ -21,12 +21,12 @@ class CharacterSheetParent extends Component{
 
         this.state = {
             abilities: { // will update with data from SERVER
-                strength: { score: 0, modifier: modifier(11) },
-                dexterity: { score: 0, modifier: modifier(14) },
-                constitution: { score: 0, modifier: modifier(18) },
-                intelligence: { score: 0, modifier: modifier(14) },
-                wisdom: { score: 0, modifier: modifier(7) },
-                charisma: { score: 0, modifier: modifier(18) }
+                strength: { score: 10, modifier: modifier(11) },
+                dexterity: { score: 10, modifier: modifier(14) },
+                constitution: { score: 10, modifier: modifier(18) },
+                intelligence: { score: 10, modifier: modifier(14) },
+                wisdom: { score: 10, modifier: modifier(7) },
+                charisma: { score: 10, modifier: modifier(18) }
             },
             skills: {
                 acrobatics: { proficient: false, ability: 'dexterity' },

@@ -36,43 +36,39 @@ class Role extends Component {
     render(){
         const { values, handleChange } = this.props;
         return(
-            <MuiThemeProvider>
-                <>
-                    <Dialog
-                        open
-                        fullWidth
-                        maxWidth='sm'
-                    >
-                        <AppBar title="Character Race" />
-                        <h2>Character Class</h2>
-                        <Select
-                            placeholder="Choose your Character's Class"
-                            label= "Character Class"
-                            onChange={handleChange('role')}
-                            defaultValue={values.race}
-                            margin="normal"
-                            fullWidth
-                        >
-                                {this.state.roles.map( ( {name} ) => {
-                                return <MenuItem value={name}>{name}</MenuItem>})}
-                        </Select>
-                        <br/>
+            <Dialog
+                open
+                fullWidth
+                maxWidth='sm'
+            >
+                <AppBar title="Character Class" />
+                <h2>Character Class</h2>
+                <Select
+                    placeholder="Choose your Character's Class"
+                    label= "Character Class"
+                    onChange={handleChange('role')}
+                    defaultValue={values.role}
+                    margin="normal"
+                    fullWidth
+                >
+                        {this.state.roles.map( ( {name} ) => {
+                        return <MenuItem value={name}>{name}</MenuItem>})}
+                </Select>
+                <br/>
 
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            onClick={this.back}
-                        >Back</Button>
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={this.back}
+                >Back</Button>
 
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={this.continue}
-                        >Continue</Button>
-                        
-                    </Dialog>
-                </>
-            </MuiThemeProvider>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={this.continue}
+                >Continue</Button>
+                
+            </Dialog>
         )
     }
 };
