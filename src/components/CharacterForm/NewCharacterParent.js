@@ -1,22 +1,20 @@
 import React, {Component} from "react";
-import Abilities from "./Abilities";
 import axios from "axios";
 
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
-import CharacterSubmit from "./CharacterSubmit";
+import Abilities from "./Abilities";
 import Level from "./Level";
 import Details from "./Details";
 import Languages from "./Languages";
 import Equipment from "./Equipment";
+import Portrait from "./Portrait";
 import ReviewCharacter from "./ReviewCharacter";
-// import Level from "./Level";
+import CharacterSubmit from "./CharacterSubmit";
 
-// import Scores from './Scores';
 // import Skills from "./Skills";
 // import SavingThrows from "./SavingThrows";
-// import Health from "./Health";
 
 // const SERVER_URL = 'http://localhost:3000/character.json'
 
@@ -42,15 +40,14 @@ class NewCharacterParent extends Component{
             personality: '',
             ideals: '',
             bonds: '',
-            flaws: ''
+            flaws: '',
+            potrait: '',
         }
-        this.createNewCharacter=this.createNewCharacter.bind(this);
+        this.createNewCharacter = this.createNewCharacter.bind(this);
         this.getHitDice = this.getHitDice.bind(this);
         this.knownLanguage=this.knownLanguage.bind(this);
-    
     };
     
-
     // Proceed to next step
     nextStep = () => {
         const { step } = this.state;
@@ -84,11 +81,9 @@ class NewCharacterParent extends Component{
         console.log(event)
         this.setState({languages: [...this.state.languages, event.target.value]})
     };
-
     
     setScores = (event) => {
         const {name, value} = event.target;
-        console.log(name);
         let newAbilities = [...this.state.abilities];
         newAbilities[name] = value;
         this.setState( { abilities: newAbilities } );
@@ -96,22 +91,20 @@ class NewCharacterParent extends Component{
     
     createNewCharacter(){
         console.log('this is the state',this.state)
-    axios.post('http://localhost:3000/characters',this.state, {withCredentials: true}).then(response=>console.log(response)).catch(error=>{console.log(error)})
-
+        axios.post('http://localhost:3000/characters',this.state, {withCredentials: true}).then(response=>console.log(response)).catch(error=>{console.log(error)})
     }
 
     getHitDice(){
         axios.get(`https://www.dnd5eapi.co/api/classes/${this.state.role.toLowerCase()}`).then( response => { 
             const hd = response.data.hit_die
-            this.setState({hit_dice: hd})
-           
-    })
+            this.setState({hit_dice: hd})       
+       });
     }
 
     render(){
         const { step } = this.state;
-        const { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws } = this.state;
-        const values = { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws };
+        const { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws, portrait } = this.state;
+        const values = { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws, portrait };
 
         switch(step) {
             case 1:
@@ -151,17 +144,12 @@ class NewCharacterParent extends Component{
                 );
             case 5:
                 return(
-                    
                     <Abilities
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
                         setScores={this.setScores}
                         abilities={values.abilities}
                     />
-                );
-            case 5:
-                return(
-                    <CharacterSubmit character={this.state} />
                 );
             case 6:
                 return(
@@ -185,7 +173,6 @@ class NewCharacterParent extends Component{
             case 8:
                     return(
                         <Equipment
-                            createNewCharacter={this.createNewCharacter}
                             nextStep={this.nextStep}
                             prevStep={this.prevStep}
                             handleChange={this.handleChange}
@@ -193,16 +180,25 @@ class NewCharacterParent extends Component{
                             getHitDice = {this.getHitDice}
                     />
                 )
-                case 9:
-                    return(
-                        <ReviewCharacter
-                            createNewCharacter={this.createNewCharacter}
-                            nextStep={this.nextStep}
-                            prevStep={this.prevStep}
-                            handleChange={this.handleChange}
-                            values={values}
+            case 9:
+                return(
+                    <Portrait
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
                     />
-                    )
+                )
+            case 10:
+                return(
+                    <ReviewCharacter
+                        createNewCharacter={this.createNewCharacter}
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        portrait={values.portrait}
+                    />
+                )
 
         }
     };

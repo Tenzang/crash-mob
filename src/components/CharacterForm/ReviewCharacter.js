@@ -8,23 +8,22 @@ function ReviewCharacter(props){
         props.prevStep();
     };
     return(
+        <Dialog
+            open
+            fullWidth
+            maxWidth='sm'
+        >
+            <h2>Character Complete</h2>
+            <Button color="primary" variant="contained" onClick={()=> props.createNewCharacter()}>Create!</Button>  
 
-                    <Dialog
-                        open
-                        fullWidth
-                        maxWidth='sm'
-                    >
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            onClick={back}
-                        >Back</Button>
-                        <br/>
-                         <Button onClick={()=> props.createNewCharacter()}>Create!</Button>
-                         
-                    </Dialog>
-               
-        
+            <Button
+                color="secondary"
+                variant="contained"
+                onClick={back}
+            >Back</Button>
+
+            <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
+        </Dialog>
     )
 }
 export default ReviewCharacter;

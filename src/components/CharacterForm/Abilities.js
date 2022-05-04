@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Select from "@material-ui/core/Select";
 import { MenuItem } from "@material-ui/core";
@@ -58,7 +56,6 @@ class Abilities extends Component {
     }    
 
     render() {
-        const { setScores } = this.props;
         return(
             <Dialog
                 open
@@ -76,7 +73,7 @@ class Abilities extends Component {
                                 onChange={ this.scoreUpdate }
                                 value={ ability.score }
                                 name={index}
-                                key={index}
+                                key={index + 6}
                             >
                                 {[15, 14, 13, 12, 10, 8].map((score, index) => {
                                     return (
@@ -89,6 +86,13 @@ class Abilities extends Component {
                 }) }
 
                 <br/>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={(event) => {
+                        this.continue(event);
+                    }}
+                >Continue</Button>
 
                 <Button
                     color="secondary"
@@ -97,15 +101,8 @@ class Abilities extends Component {
                         this.back(event);
                     }}
                 >Back</Button>
-                <br/>
-                <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={(event) => {
-                        this.continue(event);
-                    }}
-                >Continue</Button>
-                <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
+                
+                <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
                 
             </Dialog>
         );

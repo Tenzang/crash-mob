@@ -51,22 +51,22 @@ class Role extends Component {
                     margin="normal"
                     fullWidth
                 >
-                        {this.state.roles.map( ( {name} ) => {
-                        return <MenuItem value={name}>{name}</MenuItem>})}
+                        {this.state.roles.map( ( {name}, index ) => {
+                        return <MenuItem key={index} value={name}>{name}</MenuItem>})}
                 </Select>
-                <br/>
-
-                <Button
-                    color="secondary"
-                    variant="contained"
-                    onClick={this.back}
-                >Back</Button>
                 <br/>
                 <Button
                     color="primary"
                     variant="contained"
                     onClick={this.continue}
                 >Continue</Button>
+                
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={this.back}
+                >Back</Button>
+                <br/>
                 <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
             </Dialog>
         )

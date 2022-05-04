@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Select from "@material-ui/core/Select";
 import { MenuItem } from "@material-ui/core";
@@ -30,7 +29,7 @@ class Race extends Component {
         .then(res => {
             const races = res.data.results;
             this.setState({ races });
-        })
+        });
     }
 
     render(){
@@ -55,19 +54,18 @@ class Race extends Component {
                         return <MenuItem key={index} value={name}>{name}</MenuItem>})}
                 </Select>
                 <br/>
-
-                <Button
-                    color="secondary"
-                    variant="contained"
-                    onClick={this.back}
-                >Back</Button>
-                <br/>
                 <Button
                     color="primary"
                     variant="contained"
                     onClick={this.continue}
                 >Continue</Button>
-                <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={this.back}
+                >Back</Button>
+
+                <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
                 
             </Dialog>
         );
