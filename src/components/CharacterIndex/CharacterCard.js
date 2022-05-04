@@ -12,33 +12,33 @@ function CharacterCard(props) {
     return (
         <div>
             <Grid>
-            { props.characters.map(character => {
+            { props.characters.map( (character, index) => {
                 const cardStyle ={ bordeRadius: '1em',padding: 20 ,margin: ' 5% auto', height: '600px', width:'500px'}
                 const btnStyle ={marginLeft: '5%', marginBottom: '5%'}
                 const imgStyle = { borderRadius: '1em',margin: '0 auto', height:"20em"}
 
                 return (
-                    <div>
+                    <div key={index}>
                         <Card style={cardStyle} elevation={3}>
                             <Grid align='center'>
-                            <CardHeader
-                                action={
-                                    <IconButton onClick={() => props.handleDelete(character.id)}>
-                                        <DeleteOutlined/>
-                                    </IconButton>
-                                }
-                                title={character.name}
-                            />
-                            <img style={imgStyle} src={character.image}/>
-                            <CardContent>
-                                <Typography variant='body2' color='textSecondary'>
-                                    <h4>Character Level: { character.level }</h4>
-                                    <h4>Character Race: { character.race }</h4>
-                                    <h4>Character Role: { character.role }</h4>
-                                </Typography>
-                            </CardContent>
-                        <Button variant="contained" color="primary" onClick={()=>navigate(`/charactersheet/${character.id}`)} style={btnStyle}> { character.name }</Button>
-                        </Grid>
+                                <CardHeader
+                                    action={
+                                        <IconButton onClick={() => props.handleDelete(character.id)}>
+                                            <DeleteOutlined/>
+                                        </IconButton>
+                                    }
+                                    title={character.name}
+                                />
+                                <img style={imgStyle} src={character.image}/>
+                                <CardContent>
+                                    <Typography variant='body2' color='textSecondary'>
+                                        <h4>Character Level: { character.level }</h4>
+                                        <h4>Character Race: { character.race }</h4>
+                                        <h4>Character Role: { character.role }</h4>
+                                    </Typography>
+                                </CardContent>
+                                <Button variant="contained" color="primary" onClick={()=>navigate(`/charactersheet/${character.id}`)} style={btnStyle}> { character.name }</Button>
+                            </Grid>
                         </Card>
                     </div>
                 );

@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
 import CharacterCard from './CharacterCard';
 const sourceURL = 'http://localhost:3000/characters.json';
@@ -10,7 +9,7 @@ class CharacterIndexParent extends Component{
         this.state = {
             characters: [],
         }
-        this.getCharacterid = this.getCharacterid.bind(this)
+        this.handleDelete = this.handleDelete.bind(this);
     }
         
     componentDidMount() {
@@ -25,21 +24,18 @@ class CharacterIndexParent extends Component{
     }
 
    handleDelete(id){
-       console.log(this.props)
-        axios.delete(`http://localhost:3000/characters/${id}`, {withCredentials:true} ).then((response)=>console.log(response))
-        const newCharacters = this.state.characters.filter(character=> character.id != id)
-        this.setState({ characters: newCharacters })
-   }
-
-   getCharacterid(id){
-       this.props.inheritCharacterId(id)
+        axios.delete(`http://localhost:3000/characters/${id}`, {withCredentials:true} ).then((response)=> {
+            console.log(response);
+            const newCharacters = this.state.characters.filter(character=> character.id != id);
+            this.setState({ characters: newCharacters })
+        })
    }
 
     render(){
         const indexStyle = {marginTop: '10%'}
         return(
             <div style={indexStyle}>
-                <CharacterCard  getCharacterid = {this.getCharacterid} handleDelete={this.handleDelete} characters={ this.state.characters } />
+                <CharacterCard handleDelete={this.handleDelete} characters={ this.state.characters } />
             </div>
         )
     }
