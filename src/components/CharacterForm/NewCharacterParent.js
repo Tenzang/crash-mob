@@ -7,6 +7,7 @@ import Role from "./Role";
 import Level from "./Level";
 import Details from "./Details";
 import Languages from "./Languages";
+import Equipment from "./Equipment";
 // import Level from "./Level";
 
 // import Scores from './Scores';
@@ -136,6 +137,17 @@ class NewCharacterParent extends Component{
                         values={values}
                     />
                 )
+            case 8:
+                    return(
+                        <Equipment
+
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange={this.handleChange}
+                            values={values}
+                    />
+                )
+
         }
     };
 }
