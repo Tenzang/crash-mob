@@ -71,8 +71,8 @@ class CharacterSheetParent extends Component{
 
 
     componentDidMount() {
-        let characterID = window.location.href;
-        characterID = characterID[characterID.length-1];
+    let characterID = window.location.href;
+        characterID = characterID.split('charactersheet/')[1];
         console.log("making request with characterID = ", characterID);
         this.props.fetchUser('/charactersheet/' + characterID);
         console.log(this.props)

@@ -32,11 +32,8 @@ function App(){
   const logoutURL = 'http://localhost:3000/logout'
 
   const checkLogin=async(path)=>{
-    console.log(path)
     const userData = await fetchUser();
-    console.log('userData from db', userData.logged_in)
     if (userData.logged_in === false){
-      console.log('is user data false?',userData.logged_in)
       if (path == '/auth/login' || path == '/auth/registration'){
         navigate(path) 
       }
@@ -45,11 +42,8 @@ function App(){
       }
     }
     else{
-      console.log('is user data true?',userData.logged_in)
       setUser(userData.user)
       setLoggedInStatus(userData.logged_in)
-      console.log('logged in status from db',userData.logged_in)
-      console.log('state of login',loggedInStatus)
       if (path === '/auth/login' || path === '/auth/registration'){
         navigate('/')
       }
@@ -112,7 +106,6 @@ function App(){
                       <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
                         { 
                         navPages.map((page, index)=>(
-                          console.log(index),
                         <Tab key={index} label={page.name} onClick={()=>navigate(page.path)}/>
                       ))
                         }
@@ -124,7 +117,7 @@ function App(){
                       <Typography style={titleStyle}>
                         CRASH MOB
                       </Typography>
-                      <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
+                      <Tabs style={tabStyle} textColor="inherit" value={0} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
                         <Tab label={'Home'} onClick={()=>navigate('/')}/>
                       </Tabs>
                       <Button style={loginStyle} onClick={()=>navigate('/auth/login')} variant="contained">LogIn</Button>
