@@ -11,7 +11,7 @@ import Languages from "./Languages";
 import Equipment from "./Equipment";
 import Portrait from "./Portrait";
 import ReviewCharacter from "./ReviewCharacter";
-import CharacterSubmit from "./CharacterSubmit";
+
 
 // import Skills from "./Skills";
 // import SavingThrows from "./SavingThrows";
