@@ -4,6 +4,7 @@ import Abilities from "./Abilities";
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
+import CharacterSubmit from "./CharacterSubmit";
 // import Level from "./Level";
 
 // import Scores from './Scores';
@@ -98,6 +99,10 @@ class NewCharacterParent extends Component{
                     />
                 );
             case 5:
+                return(
+                    <CharacterSubmit character={this.state} />
+                );
+
         }
     }
 }

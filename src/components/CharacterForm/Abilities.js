@@ -57,11 +57,10 @@ class Abilities extends Component {
                                     {this.state[ability]}
                                     <Select
                                         onChange={this.scoreUpdate}
-                                        value={values.abilities[ability]}
                                     >
-                                        {[16, 15, 14, 13, 12, 10, 8].map(score => {
+                                        {[16, 15, 14, 13, 12, 10, 8].map((score, index) => {
                                             return (
-                                                <MenuItem value={{ability: ability, score: score}}>{score}</MenuItem>
+                                                <MenuItem key={index} value={{ability: ability, score: score}}>{score}</MenuItem>
                                             );
                                         })}
                                     </Select>

@@ -53,8 +53,8 @@ class Race extends Component {
                             margin="normal"
                             fullWidth
                         >
-                                {this.state.races.map( ( {name} ) => {
-                                return <MenuItem value={name}>{name}</MenuItem>})}
+                                {this.state.races.map( ( {name}, index ) => {
+                                return <MenuItem key={index} value={name}>{name}</MenuItem>})}
                         </Select>
                         <br/>
 
