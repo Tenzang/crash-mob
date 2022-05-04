@@ -4,7 +4,8 @@ import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import Select from "@material-ui/core/Select";
+import { MenuItem } from "@material-ui/core";
 
 class Languages extends Component {
     constructor(props){
@@ -31,15 +32,18 @@ class Languages extends Component {
     componentDidMount() {
         axios.get('https://www.dnd5eapi.co/api/races/' + this.state.race.toLowerCase())
         .then(res => {
-            // console.log(res.data.language_desc)
+            console.log(res);
             const language_desc = res.data.language_desc;
             this.setState({ language_desc });
 
-            const language_options = res.data.language_options;
-            this.setState({ language_options });
+            if(res.data.hasOwnProperty('language_options')){
+                const language_options = res.data.language_options.from;
+                this.setState({ language_options });
+            }
 
-            const languages = res.data.languages.name;
+            const languages = res.data.languages;
             this.setState({ languages })
+            console.log(languages)
         })
     }
 
@@ -56,6 +60,23 @@ class Languages extends Component {
                         <AppBar title="Character Languages" />
                         <h2>Character Languages</h2>
                         <p>{this.state.language_desc}</p>
+                        <br/>
+                        <h3>Known Languages</h3>
+                        <p>{this.state.languages.map( ( {name} ) => {
+                                return <MenuItem value={name}>{name}</MenuItem>})}</p>
+                        +
+                        <h3>Extra Language</h3>
+                        <Select
+                            placeholder="Extra Language (Race)"
+                            label= "Extra Language (Race)"
+                            onChange={handleChange('languages')}
+                            defaultValue={values.language_options}
+                            margin="normal"
+                            fullWidth
+                        >
+                                {this.state.language_options.map( ( {name} ) => {
+                                return <MenuItem value={name}>{name}</MenuItem>})}
+                        </Select>
                         <br/>
                         <Button
                             color="secondary"
