@@ -72,7 +72,7 @@ class Details extends Component {
                             variant="contained"
                             onClick={this.back}
                         >Back</Button>
-                        
+                        <br/>
                         <Button
                             color="primary"
                             variant="contained"
