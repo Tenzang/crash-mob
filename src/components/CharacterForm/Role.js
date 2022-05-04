@@ -43,13 +43,13 @@ class Role extends Component {
                         fullWidth
                         maxWidth='sm'
                     >
-                        <AppBar title="Character Race" />
+                        <AppBar title="Character Class" />
                         <h2>Character Class</h2>
                         <Select
                             placeholder="Choose your Character's Class"
                             label= "Character Class"
                             onChange={handleChange('role')}
-                            defaultValue={values.race}
+                            defaultValue={values.role}
                             margin="normal"
                             fullWidth
                         >

@@ -31,6 +31,8 @@ class NewCharacterParent extends Component{
             //proficiency_choices_2: []
 
         }
+
+        this.knownLanguage=this.knownLanguage.bind(this);
     };
 
     // Proceed to next step
@@ -52,7 +54,21 @@ class NewCharacterParent extends Component{
     // Handle fields change
     handleChange = input => event => {
         this.setState({ [input]: event.target.value });
+        
     };
+
+    // Helper functions for known languages
+    knownLanguage = (languages) => {
+        this.setState({languages: languages})
+    }
+
+    // Helper function to join known languages with chosen languages
+    handleLanguageChange = input => event => {
+        console.log('changing languages')
+        console.log(event)
+        this.setState({languages: [...this.state.languages, event.target.value]})
+    };
+
     
     render(){
         const { step } = this.state;
@@ -91,7 +107,9 @@ class NewCharacterParent extends Component{
                     <Languages
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
-                        handleChange={this.handleChange}
+                        // handleChange={this.handleChange}
+                        handleLanguageChange={this.handleLanguageChange}
+                        knownLanguage={this.knownLanguage}
                         values={values}
                     />
                 );
