@@ -10,16 +10,17 @@ import { AppBar, Typography, Toolbar , Tabs, Tab, Button, useMediaQuery, useThem
 import NewCharacterParent from './CharacterForm/NewCharacterParent';
 import CasinoIcon from '@material-ui/icons/Casino';
 import DrawerComp from './DrawerComp'
+import './app.css'
 
 function App(){
 
   const trigger =useScrollTrigger();
   const[loggedInStatus, setLoggedInStatus] = useState(false)
   const[user, setUser] = useState({})
-  const [navValue, setNavValue] = useState();
+  const [navValue, setNavValue] = useState(0);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
-  const navPages =[{name: "Home", path: '/'},{name: "Characters", path: '/characters'}, {name:"New Character", path:'/newcharacter'}]
+  const navPages =[{name: "Home", path: '/'}, {name: "Characters", path: '/characters'}, {name:"New Character", path:'/newcharacter'}]
   const [characterId] = useState(null);
 
 
@@ -38,6 +39,8 @@ function App(){
       }
     }
     else{
+      let index = navPages.findIndex(item => item.path === path)
+      setNavValue(index)
       setUser(userData.user)
       setLoggedInStatus(userData.logged_in)
       if (path === '/auth/login' || path === '/auth/registration'){
@@ -76,7 +79,7 @@ function App(){
   }
 
 
-  const appbarStyle = {backgroundColor:'#D00000'}
+  const appbarStyle = {backgroundColor:'#456990'}
   const tabStyle = {marginLeft: 'auto'}
   const loginStyle = {marginLeft: 'auto' }
   const signupStyle = {marginLeft: '10px' }
@@ -101,7 +104,7 @@ function App(){
                       <Typography style={titleStyle}>
                         CRASH MOB
                       </Typography>
-                      <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
+                      <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="primary">
                         { 
                         navPages.map((page, index)=>(
                         <Tab key={index} label={page.name} onClick={()=>navigate(page.path)}/>
@@ -115,7 +118,7 @@ function App(){
                       <Typography style={titleStyle}>
                         CRASH MOB
                       </Typography>
-                      <Tabs style={tabStyle} textColor="inherit" value={0} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
+                      <Tabs style={tabStyle} textColor="inherit" value={0} onChange={(event, value)=> setNavValue(value)} indicatorColor="primary">
                         <Tab label={'Home'} onClick={()=>navigate('/')}/>
                       </Tabs>
                       <Button style={loginStyle} onClick={()=>navigate('/auth/login')} variant="contained">LogIn</Button>
@@ -127,8 +130,6 @@ function App(){
               </Toolbar>
             </AppBar>
           </Slide>
-          <div className="feed">
-          </div>
         </>
           <Routes>
               <Route exact path={'/'} element={<Home fetchUser={checkLogin} loggedInStatus={loggedInStatus}/>}/>

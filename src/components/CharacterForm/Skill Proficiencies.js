@@ -20,10 +20,6 @@ class SkillProficiencies extends Component {
       skills: []
     };
   }
-  componentDidMount() {
-    this.props.fetchUser();
-}
-
 
   continue = event => {
     event.preventDefault();

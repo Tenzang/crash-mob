@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from 'axios';
 import CharacterCard from './CharacterCard';
+import "./indexstyle.css"
 const sourceURL = 'http://localhost:3000/characters.json';
 
 class CharacterIndexParent extends Component{
@@ -13,7 +14,7 @@ class CharacterIndexParent extends Component{
     }
         
     componentDidMount() {
-        this.props.fetchUser();
+        this.props.fetchUser('/characters');
 
         // Fetch Characters
         axios(sourceURL, {withCredentials:true}).then(response => {
@@ -34,9 +35,15 @@ class CharacterIndexParent extends Component{
     render(){
         const indexStyle = {marginTop: '10%'}
         return(
-            <div style={indexStyle}>
-                <CharacterCard handleDelete={this.handleDelete} characters={ this.state.characters } />
-            </div>
+            <>
+                { this.state.characters.length > 0 ? (
+                    <div style={indexStyle}>
+                        <CharacterCard handleDelete={this.handleDelete} characters={ this.state.characters } />
+                    </div>
+                ) : (
+                    <h1>Hey N00b. Create your first character!</h1> )
+                }
+            </>
         )
     }
 }
