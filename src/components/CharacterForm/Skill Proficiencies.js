@@ -106,14 +106,14 @@ class SkillProficiencies extends Component {
               <Button
                   color="secondary"
                   variant="contained"
-                  onClick={this.back}
-              >Back</Button>
+                  onClick={this.continue}
+              >Continue</Button>
 
               <Button
                   color="primary"
                   variant="contained"
-                  onClick={this.continue}
-              >Continue</Button>
+                  onClick={this.back}
+              >Back</Button>
               
             </Dialog>
         </>
