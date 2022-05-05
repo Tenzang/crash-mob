@@ -14,7 +14,6 @@ midnightgreen: #114B5F; */
   text-align: center;
 }
 
-
 #welcome {
   font-family: 'Bebas Neue', cursive;
   text-align: center;
@@ -23,6 +22,7 @@ midnightgreen: #114B5F; */
 }
 
 .home{
+  font-family: 'Bebas Neue', cursive;
   text-align: center;
   display: block;
   font-size: 25px;
