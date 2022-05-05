@@ -27,12 +27,12 @@ class NewCharacterParent extends Component{
             ideals: '',
             bonds: '',
             flaws: '',
-            proficiency_choices: []
-            //proficiency_choices_2: []
+            skills: []
 
         }
 
         this.knownLanguage=this.knownLanguage.bind(this);
+        this.knownSkills=this.knownSkills.bind(this);
     };
 
     // Proceed to next step
@@ -69,11 +69,22 @@ class NewCharacterParent extends Component{
         this.setState({languages: [...this.state.languages, event.target.value]})
     };
 
+    // Helper function for known skills
+    knownSkills = (skills) => {
+        this.setState({skills: skills})
+    }
+    // Helper function to join known skills with chosen starting skills
+    handleSkillChange = input => event => {
+        console.log('changing Skills')
+        console.log(event)
+        this.setState({skills: [...this.state.skills, event.target.value]})
+    };
+
     
     render(){
         const { step } = this.state;
-        const { name, race, role, languages, personality, ideals, bonds, flaws, proficiency_choices } = this.state;
-        const values = { name, race, role, languages, personality, ideals, bonds, flaws, proficiency_choices };
+        const { name, race, role, languages, personality, ideals, bonds, flaws, skills } = this.state;
+        const values = { name, race, role, languages, personality, ideals, bonds, flaws, skills };
 
         switch(step) {
             case 1:
@@ -107,7 +118,6 @@ class NewCharacterParent extends Component{
                     <Languages
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
-                        // handleChange={this.handleChange}
                         handleLanguageChange={this.handleLanguageChange}
                         knownLanguage={this.knownLanguage}
                         values={values}
@@ -127,7 +137,8 @@ class NewCharacterParent extends Component{
                     <SkillProficiencies
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
-                        handleChange={this.handleChange}
+                        handleSkillChange={this.handleSkillChange}
+                        knownSkills={this.knownSkills}
                         values={values}
                     />
                 );

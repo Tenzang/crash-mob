@@ -14,10 +14,10 @@ class SkillProficiencies extends Component {
     this.state = {
       race: props.values.race,
       role: props.values.role,
-      starting_proficiencies: [],
-      proficiency_choices: []
-      //proficiency_choices_1: [],
-      //proficiency_choices_2: []
+      race_proficiencies: [],
+      race_proficiencies_options: [],
+      class_proficiency_options: [],
+      skills: []
     };
   }
 
@@ -33,26 +33,25 @@ class SkillProficiencies extends Component {
 
   componentDidMount() {
       axios.get('https://www.dnd5eapi.co/api/classes/' + this.state.role.toLowerCase())
-      .then(res => {
-     // console.log(res)     
-          const proficiency_choices = res.data.proficiency_choices[0].from
-          console.log(proficiency_choices);
-          this.setState({ proficiency_choices });
-
-          //const proficiency_choices = res.data.proficiency_choices[0].from
-          //this.setState({ proficiency_choices });
+      .then(res => {  
+        // Getting proficiencies choices from API (Classes)
+          const class_proficiency_options = res.data.proficiency_choices[0].from
+          console.log(class_proficiency_options);
+          this.setState({ class_proficiency_options });
       })
+          // Getting starting proficiencies from API (Race)
           axios.get('https://www.dnd5eapi.co/api/races/' + this.state.race.toLowerCase())
-          .then(res => {
-          //console.log(res)         
-            const starting_proficiencies = res.data.starting_proficiencies;
-            this.setState({ starting_proficiencies });
-            console.log(starting_proficiencies);
+          .then(res => {      
+            const race_proficiencies = res.data.starting_proficiencies.map( ( {name} ) => name );
+            this.setState({ race_proficiencies });
+            this.props.knownSkills(race_proficiencies);
+            const race_proficiencies_options = res.data.starting_proficiency_options.from;
+            this.setState({ race_proficiencies_options });
       })
   }
 
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleSkillChange } = this.props;
     return (   
     <MuiThemeProvider>
       <>
@@ -62,27 +61,44 @@ class SkillProficiencies extends Component {
                     maxWidth='sm'
                     >
               <AppBar title="Skill Proficiency" />
-              <h2>Skill Proficiencies</h2>
+              <h1>Skills</h1>
+              <br/>
+              <h3>Starting Proficiencies</h3>
+              <p>{this.state.race_proficiencies.map( ( name ) => {
+                    return <MenuItem value={name}>{name}</MenuItem>})}</p>
+              <h3>Race Proficiencies Choices</h3>
               <Select
-                  placeholder="Choose your Character's Proficiency 1"
-                  label= "Skill Proficiency 1"
-                  onChange={handleChange('proficiency_choices')}
-                  defaultValue={values.proficiency_choices}
+                  placeholder="Choose your Character's Race Proficiency"
+                  label= "Race Proficiency"
+                  onChange={handleSkillChange('skills')}
+                  defaultValue={values.race_proficiencies_options}
                   margin="normal"
                   fullWidth
               >
-                      {this.state.proficiency_choices.map( ( {name} ) => {
+                      {this.state.race_proficiencies_options.map( ( {name} ) => {
+                      return <MenuItem value={name}>{name}</MenuItem>})}
+              </Select>
+              <h3>Class Proficiencies</h3>
+              <Select
+                  placeholder="Choose your Character's Class Proficiency 1"
+                  label= "Class Proficiency 1"
+                  onChange={handleSkillChange('skills')}
+                  defaultValue={values.class_proficiency_options}
+                  margin="normal"
+                  fullWidth
+              >
+                      {this.state.class_proficiency_options.map( ( {name} ) => {
                       return <MenuItem value={name}>{name}</MenuItem>})}
               </Select>
               <Select
-                  placeholder="Choose your Character's Proficiency 2"
-                  label= "Skill Proficiency 2"
-                  onChange={handleChange('proficiency_choices')}
-                  defaultValue={values.proficiency_choices}
+                  placeholder="Choose your Character's Class Proficiency 1"
+                  label= "Class Proficiency 2"
+                  onChange={handleSkillChange('skills')}
+                  defaultValue={values.class_proficiency_options}
                   margin="normal"
                   fullWidth
               >
-                      {this.state.proficiency_choices.map( ( {name} ) => {
+                      {this.state.class_proficiency_options.map( ( {name} ) => {
                       return <MenuItem value={name}>{name}</MenuItem>})}
               </Select>
               <br/>
