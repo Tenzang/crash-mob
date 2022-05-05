@@ -9,7 +9,8 @@ import Scores from './Scores';
 import Skills from "./Skills";
 import SavingThrows from "./SavingThrows";
 import Health from "./Health";
-import { Button } from "@material-ui/core";
+import { Button, Grid, Paper, Card } from "@material-ui/core";
+
 
 const sourceURL = 'http://localhost:3000';
 
@@ -159,22 +160,37 @@ class CharacterSheetParent extends Component{
 
     render(){
         const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice } = this.state;
+        const sheetStyle = {marginTop: '3%'}
+        const gridStyle = {padding :20, height: '70%', width:'50%', margin: '10% auto'}
+        const paperStyle= {display: "grid", gridTemplateColumns: "0.5fr 0.8fr 0.8fr 0.8fr", gridGap: '1%' }
+        const cardStyle={ marginBottom: '5%', paddingBottom: '4%',  border: '2px solid' }
         return(
-            <div>
-                <Name name={ name } />
-                <Race race={ race } />
-                <Role role={ role } />
-                <Level level={ level } />
-                
-                <Scores abilities={ abilities } />
-                <SavingThrows abilities={ abilities } saveProfs={ saveProfs } proficiency={ proficiencyMod }/>
-
-                <Skills abilities={ abilities } skills={ skills } proficiency={ proficiencyMod } />
-
-                <Health abilities={ abilities } hitpoints={ hitpoints } level={ level } hitDice={ hitDice } />
-
-                <Button variant="contained" size="small" color="primary">Edit</Button>
-                
+            <div style={sheetStyle}>
+                <Grid style={gridStyle}>
+                    <Paper style={paperStyle} >
+                        <Card>
+                            <Scores abilities={ abilities } />
+                        </Card>
+                        <Card>
+                            
+                            <Skills abilities={ abilities } skills={ skills } proficiency={ proficiencyMod } />
+                        </Card>
+                        <Card>
+                            <SavingThrows abilities={ abilities } saveProfs={ saveProfs } proficiency={ proficiencyMod }/>
+                        </Card>
+                        <Card>
+                            <Name name={ name } />
+                            <img></img>
+                            <Card align="center" style={cardStyle}>
+                                <Race race={ race } />
+                                <Role role={ role } />
+                            </Card>
+                            <Level level={ level } />
+                            <Health abilities={ abilities } hitpoints={ hitpoints } level={ level } hitDice={ hitDice } />
+                        </Card>
+                    </Paper>
+                        <Button variant="contained" size="small" color="primary">Edit</Button>
+                </Grid>
             </div>
         );
     }
