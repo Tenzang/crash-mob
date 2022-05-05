@@ -16,8 +16,8 @@ const sourceURL = process.env.REACT_APP_SOURCE_URL;
 function App(){
 
   const trigger =useScrollTrigger();
-  const[loggedInStatus, setLoggedInStatus] = useState(false)
-  const[user, setUser] = useState({})
+  const [loggedInStatus, setLoggedInStatus] = useState(false)
+  const [user, setUser] = useState({})
   const [navValue, setNavValue] = useState();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
@@ -120,6 +120,7 @@ function App(){
                       <Tabs style={tabStyle} textColor="inherit" value={0} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
                         <Tab label={'Home'} onClick={()=>navigate('/')}/>
                       </Tabs>
+                      <h6>{user.username}</h6>
                       <Button style={loginStyle} onClick={()=>navigate('/auth/login')} variant="contained">LogIn</Button>
                       <Button style={signupStyle} onClick={()=>navigate('/auth/registration')} variant="contained">Sign-Up</Button>
                     </>

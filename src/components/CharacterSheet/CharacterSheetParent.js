@@ -15,8 +15,7 @@ import Speed from './Speed'
 import TempHp from './TempHp'
 import HitDice from "./HitDice";
 import DeathThrows from './DeathThrows'
-import { Button, Grid, Paper, Card } from "@material-ui/core";
-import { grid } from "@mui/system";
+import { Paper, Card } from "@material-ui/core";
 
 const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
@@ -164,8 +163,8 @@ class CharacterSheetParent extends Component{
         console.log('createnew');
     }
 
-    render(){
-        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice, hit_dice, dSaveSucc, dSaveFail, speed, languages, inspiration, xp, equipment, tempHP, ideals, bonds, flaws, image  } = this.state;
+    render() {
+        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice, hit_dice, dSaveSucc, dSaveFail, speed, languages, xp, equipment, tempHP, ideals, bonds, flaws, image } = this.state;
         const headerStyle = {display: "grid", gridTemplateColumns:"20% 80%", paddingTop: '20px'}
         const headerInfo ={ gridTemplateRows:"50% 50%" }
         const sheetStyle = {display: "grid", gridTemplateRows:"27% 73%", padding :20, maxHeight: '1060px', width:'50%', margin: '10% auto',}
@@ -180,7 +179,7 @@ class CharacterSheetParent extends Component{
             <div style={sheetStyle}>
                 <Paper style={headerStyle}>
                     <Card align="center">
-                        <img style={imageStyle} src={image}/>
+                        <img style={imageStyle} src={image} alt="character portrait" />
                     </Card>
                     <Card style={headerInfo}>
                         <div style={charInfo}>

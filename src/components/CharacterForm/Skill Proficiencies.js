@@ -19,22 +19,18 @@ class SkillProficiencies extends Component {
       class_proficiency_options: [],
       skills: []
     };
-  }
-  componentDidMount() {
-    this.props.fetchUser();
-}
-
-
+  }  
+  
   continue = event => {
     event.preventDefault();
     this.props.nextStep();
   };
-
+  
   back = event => {
     event.preventDefault();
     this.props.prevStep();
   };
-
+  
   componentDidMount() {
       axios.get('https://www.dnd5eapi.co/api/classes/' + this.state.role.toLowerCase())
       .then(res => {  
