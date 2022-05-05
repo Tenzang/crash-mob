@@ -11,6 +11,8 @@ import NewCharacterParent from './CharacterForm/NewCharacterParent';
 import CasinoIcon from '@material-ui/icons/Casino';
 import DrawerComp from './DrawerComp'
 
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
+
 function App(){
 
   const trigger =useScrollTrigger();
@@ -25,7 +27,7 @@ function App(){
 
   const navigate = useNavigate();
 
-  const logoutURL = 'http://localhost:3000/logout'
+  const logoutURL = sourceURL + 'logout';
 
   const checkLogin=async(path)=>{
     const userData = await fetchUser();
