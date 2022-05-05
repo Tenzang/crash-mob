@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate} from "react-router-dom";
 import CharacterIndexParent from "./CharacterIndex/CharacterIndexParent";
-import Home from './Home'
+import Home from './homePage/Home'
 import Registration from './auth/Registration';
 import Login from './auth/Login'
 import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";

@@ -63,6 +63,9 @@ class NewCharacterParent extends Component{
         step: step - 1
         });
     };
+    componentDidMount() {
+        this.props.fetchUser();
+    }
 
     // Handle fields change
     handleChange = input => event => {
