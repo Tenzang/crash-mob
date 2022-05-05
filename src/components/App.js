@@ -128,7 +128,6 @@ function App(){
             </AppBar>
           </Slide>
           <div className="feed">
-            <h1>Placeholder to bump content below the navbar</h1> 
           </div>
         </>
           <Routes>
