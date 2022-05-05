@@ -15,7 +15,7 @@ function App(){
 
   const trigger =useScrollTrigger();
   const[loggedInStatus, setLoggedInStatus] = useState(false)
-  const[setUser] = useState({})
+  const[user, setUser] = useState({})
   const [navValue, setNavValue] = useState();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
