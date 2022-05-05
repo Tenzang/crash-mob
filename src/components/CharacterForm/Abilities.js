@@ -63,7 +63,7 @@ class Abilities extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Abilities" />
-                <h2>Choose your Abilities</h2>
+                <h2 class="headings">Choose your Abilities</h2>
 
                 { this.state.abilities.map( (ability, index) => {
                     return (
@@ -89,19 +89,15 @@ class Abilities extends Component {
                 <Button
                     color="primary"
                     variant="contained"
-                    onClick={(event) => {
-                        this.continue(event);
-                    }}
+                    onClick={this.continue}
                 >Continue</Button>
-
+                <br/>
                 <Button
                     color="secondary"
                     variant="contained"
-                    onClick={(event) => {
-                        this.back(event);
-                    }}
+                    onClick={this.back}
                 >Back</Button>
-                
+                <br/>
                 <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
                 
             </Dialog>

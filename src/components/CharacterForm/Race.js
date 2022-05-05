@@ -41,7 +41,7 @@ class Race extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Race" />
-                <h2>Character Race</h2>
+                <h2 class="headings">Character Race</h2>
                 <Select
                     placeholder="Choose your Character's Race"
                     label= "Character Race"
@@ -59,12 +59,13 @@ class Race extends Component {
                     variant="contained"
                     onClick={this.continue}
                 >Continue</Button>
+                <br/>
                 <Button
                     color="secondary"
                     variant="contained"
                     onClick={this.back}
                 >Back</Button>
-
+                <br/>
                 <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
                 
             </Dialog>
