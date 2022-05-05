@@ -1,7 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import { IconButton, Typography, Button, Grid } from '@material-ui/core'
 import { DeleteOutlined } from '@material-ui/icons';
@@ -29,7 +28,7 @@ function CharacterCard(props) {
                                     }
                                     title={character.name}
                                 />
-                                <img style={imgStyle} src={character.image}/>
+                                <img style={imgStyle} src={character.image} alt={ "portrait of " + character.name }/>
                                 <CardContent>
                                     <Typography variant='body2' color='textSecondary'>
                                         <h4>Character Level: { character.level }</h4>
