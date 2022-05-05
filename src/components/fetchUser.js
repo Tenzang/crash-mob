@@ -1,4 +1,5 @@
-const loggedinURL = 'http://localhost:3000/logged_in'
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
+const loggedinURL = sourceURL + 'logged_in';
 
 const fetchUser = async ()=>{
     const response = await fetch(
@@ -12,7 +13,6 @@ const fetchUser = async ()=>{
         }
     )
     return response.json()
-
 };
 
-export default fetchUser
+export default fetchUser;

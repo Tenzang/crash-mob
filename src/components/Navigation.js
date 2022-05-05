@@ -3,7 +3,6 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Dashboard from './Dashboard';
 import Home from './Home'
 
-
 export default class navigation extends Component {
     constructor(){
         //overide state
