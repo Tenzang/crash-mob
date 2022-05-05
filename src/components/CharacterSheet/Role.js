@@ -1,7 +1,7 @@
 function Role(props) {
     return (
         <div>
-            Class: { props.role }
+            <h3>Class: { props.role }</h3>
         </div>
     );
 }

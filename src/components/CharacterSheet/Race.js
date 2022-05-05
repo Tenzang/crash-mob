@@ -1,7 +1,7 @@
 function Race(props) {
     return (
         <div>
-            Race: { props.race }
+           <h3>Race: { props.race }</h3>
         </div>
     );
 }
