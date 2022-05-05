@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Montserrat:wght@200&family=Prompt:wght@200&display=swap");
 
 /* Brand Coolors */
@@ -17,9 +14,7 @@ midnightgreen: #114B5F; */
   text-align: center;
 }
 
-=======
->>>>>>> b928e534d1e55609d334d263fdd44acda00caee7
->>>>>>> 75a0da50a8f8cfa44c182210b3119f3109e744a5
+
 #welcome {
   font-family: 'Bebas Neue', cursive;
   text-align: center;
@@ -28,12 +23,7 @@ midnightgreen: #114B5F; */
 }
 
 .home{
-<<<<<<< HEAD
-  font-family: 'Bebas Neue', cursive;
-=======
-
   text-align: center;
->>>>>>> b928e534d1e55609d334d263fdd44acda00caee7
   display: block;
   font-size: 25px;
   padding: 2%;
