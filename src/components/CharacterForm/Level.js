@@ -1,8 +1,6 @@
-
 import React, { Component } from "react";
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { Select } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import { MenuItem } from "@material-ui/core";
@@ -21,7 +19,7 @@ class Level extends Component {
 
 
     render(){
-        const { values, handleChange } = this.props;
+        const { handleChange } = this.props;
         return(
             <Dialog
                 open

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, useNavigate} from "react-router-dom";
 import CharacterIndexParent from "./CharacterIndex/CharacterIndexParent";
-import Home from './Home'
+import Home from './homePage/Home'
 import Registration from './auth/Registration';
 import Login from './auth/Login'
 import CharacterSheetParent from "./CharacterSheet/CharacterSheetParent";
@@ -10,22 +10,17 @@ import { AppBar, Typography, Toolbar , Tabs, Tab, Button, useMediaQuery, useThem
 import NewCharacterParent from './CharacterForm/NewCharacterParent';
 import CasinoIcon from '@material-ui/icons/Casino';
 import DrawerComp from './DrawerComp'
-import { mergeClasses } from '@material-ui/styles';
-import { CallMissedSharp } from '@material-ui/icons';
-
-
-
 
 function App(){
 
   const trigger =useScrollTrigger();
   const[loggedInStatus, setLoggedInStatus] = useState(false)
-  const[user, setUser] = useState({})
+  const[setUser] = useState({})
   const [navValue, setNavValue] = useState();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   const navPages =[{name: "Home", path: '/'},{name: "Characters", path: '/characters'}, {name:"New Character", path:'/newcharacter'}]
-  const [characterId, setCharacterId] = useState(null);
+  const [characterId] = useState(null);
 
 
   const navigate = useNavigate();
@@ -35,7 +30,7 @@ function App(){
   const checkLogin=async(path)=>{
     const userData = await fetchUser();
     if (userData.logged_in === false){
-      if (path == '/auth/login' || path == '/auth/registration'){
+      if (path === '/auth/login' || path === '/auth/registration'){
         navigate(path) 
       }
       else{

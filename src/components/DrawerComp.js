@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import { Drawer, List, IconButton, ListItemText, ListItem, ListItemIcon} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ const DrawerComp = (props) => {
                 {props.loginState?(
                     navPagesLoggedIn.map((page, index)=>(
                         <>
-                            <ListItem onClick={()=>(setDrawerState(false), navigate(page.path))} button key={index}>
+                            <ListItem onClick={ () => { setDrawerState(false); navigate(page.path) } } button key={index}>
                                 <ListItemIcon>
                                     <ListItemText>{page.name}</ListItemText>
                                 </ListItemIcon>
@@ -27,7 +27,7 @@ const DrawerComp = (props) => {
                 ):(
                     navPagesLoggedOut.map((page, index)=>(
                         <>
-                            <ListItem onClick={()=>(setDrawerState(false), navigate(page.path))} button key={index}>
+                            <ListItem onClick={ () => { setDrawerState(false); navigate(page.path) } } button key={index}>
                                 <ListItemIcon>
                                     <ListItemText>{page.name}</ListItemText>
                                 </ListItemIcon>

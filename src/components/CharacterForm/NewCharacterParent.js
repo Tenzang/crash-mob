@@ -6,6 +6,7 @@ import Race from "./Race";
 import Role from "./Role";
 import Abilities from "./Abilities";
 import Level from "./Level";
+import SkillProficiencies from "./Skill Proficiencies";
 import Details from "./Details";
 import Languages from "./Languages";
 import Equipment from "./Equipment";
@@ -42,10 +43,13 @@ class NewCharacterParent extends Component{
             bonds: '',
             flaws: '',
             image: '',
+            skills: []
+
         }
         this.createNewCharacter = this.createNewCharacter.bind(this);
         this.getHitDice = this.getHitDice.bind(this);
         this.knownLanguage=this.knownLanguage.bind(this);
+        this.knownSkills=this.knownSkills.bind(this);
     };
     
     // Proceed to next step
@@ -63,6 +67,9 @@ class NewCharacterParent extends Component{
         step: step - 1
         });
     };
+    componentDidMount() {
+        this.props.fetchUser();
+    }
 
     // Handle fields change
     handleChange = input => event => {
@@ -73,14 +80,24 @@ class NewCharacterParent extends Component{
     // Helper functions for known languages
     knownLanguage = (languages) => {
         this.setState({languages: languages})
-    }
+    };
 
     // Helper function to join known languages with chosen languages
     handleLanguageChange = input => event => {
-        console.log('changing languages')
-        console.log(event)
         this.setState({languages: [...this.state.languages, event.target.value]})
     };
+
+    // Helper function for known skills
+    knownSkills = (skills) => {
+        this.setState({skills: skills})
+    }
+    // Helper function to join known skills with chosen starting skills
+    handleSkillChange = input => event => {
+        console.log('changing Skills')
+        console.log(event)
+        this.setState({skills: [...this.state.skills, event.target.value]})
+    };
+
     
     setScores = (event) => {
         const {name, value} = event.target;
@@ -103,8 +120,8 @@ class NewCharacterParent extends Component{
 
     render(){
         const { step } = this.state;
-        const { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws, portrait } = this.state;
-        const values = { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws, portrait };
+        const { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws, portrait, skills } = this.state;
+        const values = { name, race, role, level, abilities, languages, personality, ideals, bonds, flaws, portrait, skills };
 
         switch(step) {
             case 1:
@@ -171,14 +188,14 @@ class NewCharacterParent extends Component{
                     />
                 )
             case 8:
-                    return(
-                        <Equipment
-                            nextStep={this.nextStep}
-                            prevStep={this.prevStep}
-                            handleChange={this.handleChange}
-                            values={values}
-                            getHitDice = {this.getHitDice}
-                    />
+                return(
+                    <Equipment
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                        getHitDice = {this.getHitDice}
+                />
                 )
             case 9:
                 return(
@@ -191,6 +208,16 @@ class NewCharacterParent extends Component{
                 )
             case 10:
                 return(
+                    <SkillProficiencies
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleSkillChange={this.handleSkillChange}
+                        knownSkills={this.knownSkills}
+                        values={values}
+                    />
+                )       
+            case 11:
+                return(
                     <ReviewCharacter
                         createNewCharacter={this.createNewCharacter}
                         nextStep={this.nextStep}
@@ -199,7 +226,11 @@ class NewCharacterParent extends Component{
                         portrait={values.portrait}
                     />
                 )
-
+            default:
+                return(
+                <div>
+                    <p>something went wrong...</p>
+                </div>)
         }
     };
 }

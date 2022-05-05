@@ -1,5 +1,4 @@
 import { Card } from "@material-ui/core";
-const cardStyle={marginTop: '2%', marginBottom: '2%', border: '2px solid' }
 
 function Health (props) {
     const { abilities, hitpoints, level, hitDice } = props;

@@ -28,7 +28,7 @@ function CharacterCard(props) {
                                     }
                                     title={character.name}
                                 />
-                                <img style={imgStyle} src={character.image}/>
+                                <img style={imgStyle} src={character.image} alt={ "portrait of " + character.name }/>
                                 <CardContent>
                                     <Typography variant='body2' color='textSecondary'>
                                         <h4>Character Level: { character.level }</h4>

@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, Text, FlatList} from 'react'
 import { Card } from "@material-ui/core";
-import { Grid } from '@mui/material';
 import _ from "lodash";
 
 function Scores(props) {
