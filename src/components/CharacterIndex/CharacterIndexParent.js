@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import axios from 'axios';
 import CharacterCard from './CharacterCard';
 import "./indexstyle.css"
-const sourceURL = 'http://localhost:3000/characters.json';
+
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
 class CharacterIndexParent extends Component{
     constructor(props) {

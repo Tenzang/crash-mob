@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Montserrat:wght@200&family=Prompt:wght@200&display=swap");
 
-/* Brand Coolors */
+/* Brand Colors */
 /* wine: #6B2737;
 fieryrose: #F45B69;
 lavender: #D8DDEF;
@@ -17,9 +13,6 @@ midnightgreen: #114B5F; */
   text-align: center;
 }
 
-=======
->>>>>>> b928e534d1e55609d334d263fdd44acda00caee7
->>>>>>> 75a0da50a8f8cfa44c182210b3119f3109e744a5
 #welcome {
   font-family: 'Bebas Neue', cursive;
   text-align: center;
@@ -28,16 +21,13 @@ midnightgreen: #114B5F; */
 }
 
 .home{
-<<<<<<< HEAD
   font-family: 'Bebas Neue', cursive;
-=======
-
   text-align: center;
->>>>>>> b928e534d1e55609d334d263fdd44acda00caee7
   display: block;
   font-size: 25px;
   padding: 2%;
 }
+
 #button {
   background-color: #114B5F; 
   border: none;
@@ -49,6 +39,7 @@ midnightgreen: #114B5F; */
   font-size: 16px;
   margin: auto;
 }
+
 .iframe-container{
   margin: auto;
   display: flexbox;
