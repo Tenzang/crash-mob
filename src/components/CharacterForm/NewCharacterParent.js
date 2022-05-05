@@ -104,7 +104,7 @@ class NewCharacterParent extends Component{
         let newAbilities = [...this.state.abilities];
         newAbilities[name] = value;
         this.setState( { abilities: newAbilities } );
-    };
+    }
     
     createNewCharacter(){
         console.log('this is the state',this.state)

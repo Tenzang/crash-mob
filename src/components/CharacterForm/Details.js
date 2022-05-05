@@ -67,14 +67,14 @@ class Details extends Component {
                     variant="contained"
                     onClick={this.continue}
                 >Continue</Button>
-
+                <br/>
                 <Button
                     color="secondary"
                     variant="contained"
                     onClick={this.back}
                 >Back</Button>
-
-                <Button onClick={ () => window.location.href='/characters' }>Exit</Button>
+                <br/>
+                <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
 
             </Dialog>
         );

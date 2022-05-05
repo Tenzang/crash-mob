@@ -55,20 +55,20 @@ class Level extends Component {
                         <MenuItem value={19}>Nineteen</MenuItem>
                         <MenuItem value={20}>Twenty</MenuItem>
                     </Select>
-                <br/>
+                    <br/>
                 <Button
                     color="primary"
                     variant="contained"
                     onClick={this.continue}
                 >Continue</Button>
-                
+                <br/>
                 <Button
                     color="secondary"
                     variant="contained"
                     onClick={this.back}
                 >Back</Button>
                 <br/>
-                <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
+                <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
             </Dialog>
         )
     }
