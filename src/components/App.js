@@ -12,6 +12,8 @@ import CasinoIcon from '@material-ui/icons/Casino';
 import DrawerComp from './DrawerComp'
 import './app.css'
 
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
+
 function App(){
 
   const trigger =useScrollTrigger();
@@ -26,7 +28,7 @@ function App(){
 
   const navigate = useNavigate();
 
-  const logoutURL = 'http://localhost:3000/logout'
+  const logoutURL = sourceURL + 'logout';
 
   const checkLogin=async(path)=>{
     const userData = await fetchUser();
@@ -121,6 +123,7 @@ function App(){
                       <Tabs style={tabStyle} textColor="inherit" value={0} onChange={(event, value)=> setNavValue(value)} indicatorColor="primary">
                         <Tab label={'Home'} onClick={()=>navigate('/')}/>
                       </Tabs>
+                      <h6>{user.username}</h6>
                       <Button style={loginStyle} onClick={()=>navigate('/auth/login')} variant="contained">LogIn</Button>
                       <Button style={signupStyle} onClick={()=>navigate('/auth/registration')} variant="contained">Sign-Up</Button>
                     </>

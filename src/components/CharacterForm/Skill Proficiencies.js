@@ -25,12 +25,12 @@ class SkillProficiencies extends Component {
     event.preventDefault();
     this.props.nextStep();
   };
-
+  
   back = event => {
     event.preventDefault();
     this.props.prevStep();
   };
-
+  
   componentDidMount() {
       axios.get('https://www.dnd5eapi.co/api/classes/' + this.state.role.toLowerCase())
       .then(res => {  

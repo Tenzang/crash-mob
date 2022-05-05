@@ -17,7 +17,7 @@ class CharacterIndexParent extends Component{
         this.props.fetchUser('/characters');
 
         // Fetch Characters
-        axios(sourceURL, {withCredentials:true}).then(response => {
+        axios(sourceURL + 'characters.json', {withCredentials:true}).then(response => {
             const characters = response.data;
             this.setState({ characters: characters });
         });
@@ -25,7 +25,7 @@ class CharacterIndexParent extends Component{
     }
 
    handleDelete(id){
-        axios.delete(`http://localhost:3000/characters/${id}`, {withCredentials:true} ).then((response)=> {
+        axios.delete(sourceURL + 'characters/' + String(id), {withCredentials:true} ).then((response)=> {
             console.log(response);
             const newCharacters = this.state.characters.filter(character=> character.id !== id);
             this.setState({ characters: newCharacters })

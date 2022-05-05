@@ -1,7 +1,7 @@
 import { Card } from "@material-ui/core";
 
 function Name(props) {
-    const cardStyle={marginBottom: '5%', paddingBottom: '4%',  border: '2px solid' }
+    const cardStyle={ border: '2px solid', padding: "6%", marginRight: '2%', marginLeft: '2%'}
     return (
         <div align='center'>
             <Card style={cardStyle}>

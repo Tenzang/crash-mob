@@ -5,7 +5,7 @@ import _ from "lodash";
 function SavingThrows(props) {
     const { abilities, saveProfs, proficiency } = props;
     const headerStyle ={display: "inline"}
-    const cardStyle={ marginBottom: '5%', paddingBottom: '4%',  border: '2px solid' }
+    const cardStyle={ marginBottom: '2%', paddingBottom: '4%',  border: '2px solid' }
     const paraStyle={fontSize:'10px'}
     const divStyle={padding:'2%'}
 

@@ -13,11 +13,9 @@ import Equipment from "./Equipment";
 import Portrait from "./Portrait";
 import ReviewCharacter from "./ReviewCharacter";
 
-
-// import Skills from "./Skills";
 // import SavingThrows from "./SavingThrows";
 
-// const SERVER_URL = 'http://localhost:3000/character.json'
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
 class NewCharacterParent extends Component{
     constructor() {
@@ -109,7 +107,7 @@ class NewCharacterParent extends Component{
     
     createNewCharacter(){
         console.log('this is the state',this.state)
-        axios.post('http://localhost:3000/characters',this.state, {withCredentials: true}).then(response=>console.log(response)).catch(error=>{console.log(error)})
+        axios.post( sourceURL + 'characters', this.state, {withCredentials: true}).then(response=>console.log(response)).catch(error=>{console.log(error)})
     }
 
     getHitDice(){

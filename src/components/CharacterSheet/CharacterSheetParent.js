@@ -1,17 +1,23 @@
 import React, {Component} from "react";
 import axios from 'axios';
 import Name from "./Name";
-import Race from "./Race";
-import Role from "./Role";
-import Level from "./Level";
+import Stats from "./Stats";
 import Scores from './Scores';
 import Skills from "./Skills";
 import SavingThrows from "./SavingThrows";
+import Languages from "./Languages"
 import Health from "./Health";
-import { Button, Grid, Paper, Card } from "@material-ui/core";
+import Equipment from './Equipment'
+import Bonds from './Bonds'
+import Flaws from './Flaws'
+import Ideals from './Ideals'
+import Speed from './Speed'
+import TempHp from './TempHp'
+import HitDice from "./HitDice";
+import DeathThrows from './DeathThrows'
+import { Paper, Card } from "@material-ui/core";
 
-
-const sourceURL = 'http://localhost:3000';
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
 const modifier = score => Math.floor((score - 10) / 2);
 
@@ -50,7 +56,7 @@ class CharacterSheetParent extends Component{
                 survival: { proficient: false, ability: 'wisdom' },
             },
             proficiencyMod: 2,
-            URL: {character: `${sourceURL}/characters/`, score: `${sourceURL}/scores/`, skills: `${sourceURL}/skills/`, abilities: `${sourceURL}/abilities/` },
+            URL: {character: sourceURL + '/characters/', score: sourceURL + 'scores/', skills: sourceURL + 'skills/', abilities: sourceURL + 'abilities/' },
             name: "???",
             race: "???",
             role: "???",
@@ -157,38 +163,64 @@ class CharacterSheetParent extends Component{
         console.log('createnew');
     }
 
-    render(){
-        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice, } = this.state;
-        const sheetStyle = {marginTop: '3%'}
-        const gridStyle = {padding :20, height: '70%', width:'50%', margin: '10% auto'}
-        const paperStyle= {display: "grid", gridTemplateColumns: "0.5fr 0.8fr 0.8fr 0.8fr", gridGap: '1%' }
-        const cardStyle={ marginBottom: '5%', paddingBottom: '4%',  border: '2px solid' }
+    render() {
+        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice, hit_dice, dSaveSucc, dSaveFail, speed, languages, xp, equipment, tempHP, ideals, bonds, flaws, image } = this.state;
+        const headerStyle = {display: "grid", gridTemplateColumns:"20% 80%", paddingTop: '20px'}
+        const headerInfo ={ gridTemplateRows:"50% 50%" }
+        const sheetStyle = {display: "grid", gridTemplateRows:"27% 73%", padding :20, maxHeight: '1060px', width:'50%', margin: '10% auto',}
+        const paperStyle= {display: "grid", gridTemplateColumns: "0.5fr 0.8fr 0.8fr 0.8fr", gridGap: '1%', padding:'20px'}
+        const tempDiceThrows = {display: 'grid', gridTemplateColumns:"33% 33% 33%"}
+        const speedHealth ={display: 'grid', gridTemplateColumns:"50% 50%"}
+        const imageStyle = { height: '100%', borderRadius:'2em'}
+        const charInfo = {display: "grid", gridTemplateColumns: "40% 60%"}
+        const smallData = {display: 'grid', gridTemplateColumns: '40% 60%', paddingTop:'5%'}
+
         return(
             <div style={sheetStyle}>
-                <Grid style={gridStyle}>
-                    <Paper style={paperStyle} >
-                        <Card>
-                            <Scores abilities={ abilities } />
-                        </Card>
-                        <Card>
-                            <Skills abilities={ abilities } skills={ skills } proficiency={ proficiencyMod } />
-                        </Card>
-                        <Card>
-                            <SavingThrows abilities={ abilities } saveProfs={ saveProfs } proficiency={ proficiencyMod }/>
-                        </Card>
-                        <Card>
-                            <Name name={ name } />
-                            {/* TODO <img></img> */}
-                            <Card align="center" style={cardStyle}>
-                                <Race race={ race } />
-                                <Role role={ role } />
-                            </Card>
-                            <Level level={ level } />
-                            <Health abilities={ abilities } hitpoints={ hitpoints } level={ level } hitDice={ hitDice } />
-                        </Card>
-                    </Paper>
-                        <Button variant="contained" size="small" color="primary">Edit</Button>
-                </Grid>
+                <Paper style={headerStyle}>
+                    <Card align="center">
+                        <img style={imageStyle} src={image} alt="character portrait" />
+                    </Card>
+                    <Card style={headerInfo}>
+                        <div style={charInfo}>
+                            <div>
+                                <Name name={ name } />
+                            </div>
+                            <div>
+                                <Stats race={ race } role={ role } level={level} xp={xp} />
+                            </div>
+                        </div>
+                        <div style={smallData}>
+                            <div align= 'center' style={speedHealth}>
+                                <Speed speed={speed}/>
+                                <Health abilities={ abilities } hitpoints={ hitpoints } level={ level } hitDice={ hitDice } />
+                            </div>
+                            <div align="center" style={tempDiceThrows}>
+                                <TempHp tempHP= {tempHP}/>
+                                <HitDice hitDice= {hit_dice}/>
+                                <DeathThrows dSaveSucc= {dSaveSucc} dSaveFail={dSaveFail}/>
+                            </div>   
+                        </div>
+                    </Card>
+                </Paper>
+                <Paper style={paperStyle} >
+                    <Card>
+                        <Scores abilities={ abilities } />
+                    </Card>
+                    <Card>
+                        <Skills abilities={ abilities } skills={ skills } proficiency={ proficiencyMod } />
+                    </Card>
+                    <Card>
+                        <SavingThrows abilities={ abilities } saveProfs={ saveProfs } proficiency={ proficiencyMod }/>
+                        <Equipment equipment={ equipment }/>
+                        <Languages languages={languages}/>
+                    </Card>
+                    <Card>
+                        <Ideals ideals={ideals}/>
+                        <Bonds bonds={bonds}/>
+                        <Flaws flaws={flaws}/>
+                    </Card>
+                </Paper>
             </div>
         );
     }
