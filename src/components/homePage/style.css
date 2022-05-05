@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Montserrat:wght@200&family=Prompt:wght@200&display=swap");
 
 
-h2{
+#welcome {
   font-family: 'Bebas Neue', cursive;
   text-align: center;
   font-size: 60px;
-  
 }
+
 .home{
   font-family: 'Bebas Neue', cursive;
   text-align: center;
@@ -37,4 +37,19 @@ h2{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+@media only screen and (max-width: 790px) {
+  .home {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+  }
+
+  #welcome {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    border-bottom: 0px;
+  }
+
 }
