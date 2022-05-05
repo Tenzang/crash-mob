@@ -32,13 +32,16 @@ class Languages extends Component {
     componentDidMount() {
         axios.get('https://www.dnd5eapi.co/api/races/' + this.state.race.toLowerCase())
         .then(res => {
+            // Get language description from API
             const language_desc = res.data.language_desc;
             this.setState({ language_desc });
 
+            // Get known languages from API
             const languages = res.data.languages.map( ( {name} ) => name);
             this.setState({ languages })
             this.props.knownLanguage(languages)
 
+            // Get extra language choices from API (if applicable)
             if(res.data.hasOwnProperty('language_options')){
                 const language_options = res.data.language_options.from;
                 this.setState({ language_options });

@@ -73,12 +73,10 @@ class NewCharacterParent extends Component{
     // Helper functions for known languages
     knownLanguage = (languages) => {
         this.setState({languages: languages})
-    }
+    };
 
     // Helper function to join known languages with chosen languages
     handleLanguageChange = input => event => {
-        console.log('changing languages')
-        console.log(event)
         this.setState({languages: [...this.state.languages, event.target.value]})
     };
     
@@ -171,14 +169,14 @@ class NewCharacterParent extends Component{
                     />
                 )
             case 8:
-                    return(
-                        <Equipment
-                            nextStep={this.nextStep}
-                            prevStep={this.prevStep}
-                            handleChange={this.handleChange}
-                            values={values}
-                            getHitDice = {this.getHitDice}
-                    />
+                return(
+                    <Equipment
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                        getHitDice = {this.getHitDice}
+                />
                 )
             case 9:
                 return(
