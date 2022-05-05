@@ -159,7 +159,7 @@ class CharacterSheetParent extends Component{
     }
 
     render(){
-        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice } = this.state;
+        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice, } = this.state;
         const sheetStyle = {marginTop: '3%'}
         const gridStyle = {padding :20, height: '70%', width:'50%', margin: '10% auto'}
         const paperStyle= {display: "grid", gridTemplateColumns: "0.5fr 0.8fr 0.8fr 0.8fr", gridGap: '1%' }
@@ -172,7 +172,6 @@ class CharacterSheetParent extends Component{
                             <Scores abilities={ abilities } />
                         </Card>
                         <Card>
-                            
                             <Skills abilities={ abilities } skills={ skills } proficiency={ proficiencyMod } />
                         </Card>
                         <Card>
