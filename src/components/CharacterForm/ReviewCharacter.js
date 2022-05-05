@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
@@ -7,23 +6,27 @@ function ReviewCharacter(props){
         event.preventDefault();
         props.prevStep();
     };
+    
     return(
+        <Dialog
+            open
+            fullWidth
+            maxWidth='sm'
+        >
+            <h2>Character Complete</h2>
+            <Button color="primary" variant="contained" onClick={()=> {
+                props.createNewCharacter();
+                window.location.href='/characters';
+            }}>Create!</Button>
 
-                    <Dialog
-                        open
-                        fullWidth
-                        maxWidth='sm'
-                    >
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            onClick={back}
-                        >Back</Button>
-                        <br/>
-                         <Button onClick={()=> props.createNewCharacter()}>Create!</Button>
-                    </Dialog>
-               
-        
-    )
+            <Button
+                color="secondary"
+                variant="contained"
+                onClick={back}
+            >Back</Button>
+
+            <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
+        </Dialog>
+    );
 }
 export default ReviewCharacter;

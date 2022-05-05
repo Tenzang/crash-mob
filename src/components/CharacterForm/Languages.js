@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Select from "@material-ui/core/Select";
 import { MenuItem } from "@material-ui/core";
@@ -51,48 +50,46 @@ class Languages extends Component {
     render() {
         const { values, handleLanguageChange } = this.props;
         return (
-            <MuiThemeProvider>
-                <>
-                    <Dialog
-                        open
-                        fullWidth
-                        maxWidth='sm'
-                    >
-                        <AppBar title="Character Languages" />
-                        <h2>Character Languages ({this.state.race})</h2>
-                        <p>{this.state.language_desc}</p>
-                        <br/>
-                        <h3>Known Languages</h3>
-                        <p>{this.state.languages.map( ( language ) => {
-                                return <MenuItem value={language}>{language}</MenuItem>})}</p>
-                        <h3>Extra Language</h3>
-                        <Select
-                            placeholder="Extra Language (Race)"
-                            label= "Extra Language (Race)"
-                            onChange={handleLanguageChange('languages')}
-                            defaultValue={values.language_options}
-                            margin="normal"
-                            fullWidth
-                        >
-                                {this.state.language_options.map( ( {name} ) => {
-                                return <MenuItem value={name}>{name}</MenuItem>})}
-                        </Select>
-                        <br/>
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            onClick={this.back}
-                        >Back</Button>
-                        <br/>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={this.continue}
-                        >Continue</Button>
-                       
-                    </Dialog>
-                </>
-            </MuiThemeProvider>
+            <Dialog
+                open
+                fullWidth
+                maxWidth='sm'
+            >
+                <AppBar title="Character Languages" />
+                <h2>Character Languages ({this.state.race})</h2>
+                <p>{this.state.language_desc}</p>
+                <br/>
+                <h3>Known Languages</h3>
+                <p>{this.state.languages.map( ( language ) => {
+                        return <MenuItem value={language}>{language}</MenuItem>})}</p>
+                <h3>Extra Language</h3>
+                <Select
+                    placeholder="Extra Language (Race)"
+                    label= "Extra Language (Race)"
+                    onChange={handleLanguageChange('languages')}
+                    defaultValue={values.language_options}
+                    margin="normal"
+                    fullWidth
+                >
+                        {this.state.language_options.map( ( {name}, index ) => {
+                        return <MenuItem key={index} value={name}>{name}</MenuItem>})}
+                </Select>
+                <br/>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={this.continue}
+                >Continue</Button>
+
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={this.back}
+                >Back</Button>
+
+                <Button onClick={ () => window.location.href='/characters' }>Exit</Button>
+
+            </Dialog>
         );
     }
 }
