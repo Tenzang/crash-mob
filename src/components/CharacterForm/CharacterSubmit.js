@@ -25,6 +25,7 @@ function CharacterSubmit(props) {
                 onClick={ axios.get(sourceURL + "characters", props) }
             >Create Character</Button>
             <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
+            
         </div>
         
     );

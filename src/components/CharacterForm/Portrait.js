@@ -26,7 +26,7 @@ function Portrait (props) {
                 <TextField
                     placeholder="http://..."
                     label="Character Portrait"
-                    onChange={props.handleChange('Portrait')}
+                    onChange={props.handleChange('image')}
                     defaultValue={props.portrait}
                     margin="normal"
                     fullWidth

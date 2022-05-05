@@ -41,7 +41,7 @@ class NewCharacterParent extends Component{
             ideals: '',
             bonds: '',
             flaws: '',
-            potrait: '',
+            image: '',
         }
         this.createNewCharacter = this.createNewCharacter.bind(this);
         this.getHitDice = this.getHitDice.bind(this);
