@@ -16,7 +16,7 @@ function App(){
   const trigger =useScrollTrigger();
   const[loggedInStatus, setLoggedInStatus] = useState(false)
   const[user, setUser] = useState({})
-  const [navValue, setNavValue] = useState();
+  const [navValue, setNavValue] = useState(0);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   const navPages =[{name: "Home", path: '/'},{name: "Characters", path: '/characters'}, {name:"New Character", path:'/newcharacter'}]
@@ -38,22 +38,22 @@ function App(){
       }
     }
     else{
+      let index = navPages.findIndex(item=>item.path === path)
+      setNavValue(index)
       setUser(userData.user)
       setLoggedInStatus(userData.logged_in)
       if (path === '/auth/login' || path === '/auth/registration'){
         navigate('/')
       }
-      else{
-        navigate(path)
-      }
+      
     }
   }
 
   function loggedIn(path, data){
     console.log(data)
-    navigate(path, data)
     setLoggedInStatus(data.logged_in)
     setUser(data.user)
+    navigate(path, data)
   }
 
   const loggedOut = async()=>{
@@ -104,7 +104,7 @@ function App(){
                       <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
                         { 
                         navPages.map((page, index)=>(
-                        <Tab key={index} label={page.name} onClick={()=>navigate(page.path)}/>
+                        <Tab value={index} key={index} label={page.name} onClick={()=>navigate(page.path)}/>
                       ))
                         }
                       </Tabs>
@@ -115,8 +115,8 @@ function App(){
                       <Typography style={titleStyle}>
                         CRASH MOB
                       </Typography>
-                      <Tabs style={tabStyle} textColor="inherit" value={0} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
-                        <Tab label={'Home'} onClick={()=>navigate('/')}/>
+                      <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
+                        <Tab value={navValue} label={'Home'} onClick={()=>navigate('/')}/>
                       </Tabs>
                       <Button style={loginStyle} onClick={()=>navigate('/auth/login')} variant="contained">LogIn</Button>
                       <Button style={signupStyle} onClick={()=>navigate('/auth/registration')} variant="contained">Sign-Up</Button>

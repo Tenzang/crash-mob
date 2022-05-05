@@ -17,6 +17,7 @@ import HitDice from "./HitDice";
 import DeathThrows from './DeathThrows'
 import { Button, Grid, Paper, Card } from "@material-ui/core";
 import { grid } from "@mui/system";
+import './CharacterSheet.css'
 
 
 const sourceURL = 'http://localhost:3000';
@@ -167,15 +168,15 @@ class CharacterSheetParent extends Component{
 
     render(){
         const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice, hit_dice, dSaveSucc, dSaveFail, speed, languages, inspiration, xp, equipment, tempHP, ideals, bonds, flaws, image  } = this.state;
-        const headerStyle = {display: "grid", gridTemplateColumns:"20% 80%", paddingTop: '20px'}
+        const headerStyle = {display: "grid", gridTemplateColumns:"20% 80%", paddingTop: '2.5%', paddingRight: '2.5%', paddingLeft: '0.5%'}
         const headerInfo ={ gridTemplateRows:"50% 50%" }
-        const sheetStyle = {display: "grid", gridTemplateRows:"27% 73%", padding :20, maxHeight: '1060px', width:'50%', margin: '10% auto',}
-        const paperStyle= {display: "grid", gridTemplateColumns: "0.5fr 0.8fr 0.8fr 0.8fr", gridGap: '1%', padding:'20px'}
+        const sheetStyle = {display: "grid", gridTemplateRows:"26% 74%", maxHeight: '1200px', width:'50%', margin: '5% auto', border: '2px solid rgba(46, 71, 96, 1)'}
+        const paperStyle= {display: "grid", gridTemplateColumns: "0.5fr 0.8fr 0.8fr 0.8fr", gridGap: '1%', paddingBottom:'2.5%', paddingRight: '2.5%', paddingLeft: '2.5%'}
         const tempDiceThrows = {display: 'grid', gridTemplateColumns:"33% 33% 33%"}
         const speedHealth ={display: 'grid', gridTemplateColumns:"50% 50%"}
-        const imageStyle = { height: '100%', borderRadius:'2em'}
+        const imageStyle = { height: '85%', borderRadius:'2em'}
         const charInfo = {display: "grid", gridTemplateColumns: "40% 60%"}
-        const smallData = {display: 'grid', gridTemplateColumns: '40% 60%', paddingTop:'5%'}
+        const smallData = {display: 'grid', gridTemplateColumns: '40% 60%', paddingTop:'2%'}
 
         return(
             <div style={sheetStyle}>
@@ -199,7 +200,7 @@ class CharacterSheetParent extends Component{
                             </div>
                             <div align="center" style={tempDiceThrows}>
                                 <TempHp tempHP= {tempHP}/>
-                                <HitDice hitDice= {hit_dice}/>
+                                <HitDice level={level} hitDice= {hit_dice}/>
                                 <DeathThrows dSaveSucc= {dSaveSucc} dSaveFail={dSaveFail}/>
                             </div>   
                         </div>

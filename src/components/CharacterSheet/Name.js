@@ -1,11 +1,12 @@
 import { Card } from "@material-ui/core";
+import './CharacterSheet.css'
 
 function Name(props) {
-    const cardStyle={ border: '2px solid', padding: "6%", marginRight: '2%', marginLeft: '2%'}
+    const cardStyle={ border: '2px solid', padding: "5%", marginRight: '2%', marginLeft: '2%'}
     return (
         <div align='center'>
             <Card style={cardStyle}>
-                <h1>{ props.name }</h1>
+                <h1 className="h1Char">{ props.name }</h1>
             </Card>
         </div>
     );

@@ -13,7 +13,7 @@ class CharacterIndexParent extends Component{
     }
         
     componentDidMount() {
-        this.props.fetchUser();
+        this.props.fetchUser('/characters');
 
         // Fetch Characters
         axios(sourceURL, {withCredentials:true}).then(response => {

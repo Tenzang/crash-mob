@@ -1,4 +1,5 @@
 import { Card } from "@material-ui/core";
+import './CharacterSheet.css'
 
 function Health (props) {
     const { abilities, hitpoints, level, hitDice } = props;
@@ -8,8 +9,8 @@ function Health (props) {
     return (
         <div>
             <Card style={cardStyle} align='center'>
-                <h3>Hitpoints</h3>
-                <h3>{ hitpoints } / { maxHealth }</h3>
+                <h3 className="h3Char">Hitpoints</h3>
+                <h3 className="h3Char">{ hitpoints } / { maxHealth }</h3>
             </Card>
         </div>
     );

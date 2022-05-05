@@ -12,7 +12,7 @@ function CharacterCard(props) {
         <div>
             <Grid>
             { props.characters.map( (character, index) => {
-                const cardStyle ={ bordeRadius: '1em',padding: 20 ,margin: ' 5% auto', height: '600px', width:'500px'}
+                const cardStyle ={ bordeRadius: '1em',padding: 20 ,margin: ' 5% auto', height: '20%', width:'40%'}
                 const btnStyle ={marginLeft: '5%', marginBottom: '5%'}
                 const imgStyle = { borderRadius: '1em',margin: '0 auto', height:"20em"}
 
