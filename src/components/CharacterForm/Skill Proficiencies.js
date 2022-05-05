@@ -20,6 +20,10 @@ class SkillProficiencies extends Component {
       skills: []
     };
   }
+  componentDidMount() {
+    this.props.fetchUser();
+}
+
 
   continue = event => {
     event.preventDefault();
@@ -61,7 +65,7 @@ class SkillProficiencies extends Component {
                     maxWidth='sm'
                     >
               <AppBar title="Skill Proficiency" />
-              <h1>Skills</h1>
+              <h1 class="headings">Skills</h1>
               <br/>
               <h3>Starting Proficiencies</h3>
               <p>{this.state.race_proficiencies.map( ( name ) => {
@@ -102,18 +106,19 @@ class SkillProficiencies extends Component {
                       return <MenuItem value={name}>{name}</MenuItem>})}
               </Select>
               <br/>
-
-              <Button
-                  color="secondary"
-                  variant="contained"
-                  onClick={this.back}
-              >Back</Button>
-
-              <Button
-                  color="primary"
-                  variant="contained"
-                  onClick={this.continue}
-              >Continue</Button>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={this.continue}
+                >Continue</Button>
+                <br/>
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={this.back}
+                >Back</Button>
+                <br/>
+                <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
               
             </Dialog>
         </>

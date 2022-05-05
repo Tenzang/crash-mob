@@ -41,7 +41,7 @@ class Role extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Class" />
-                <h2>Character Class</h2>
+                <h2 class="headings">Character Class</h2>
                 <Select
                     placeholder="Choose your Character's Class"
                     label= "Character Class"
@@ -59,14 +59,14 @@ class Role extends Component {
                     variant="contained"
                     onClick={this.continue}
                 >Continue</Button>
-                
+                <br/>
                 <Button
                     color="secondary"
                     variant="contained"
                     onClick={this.back}
                 >Back</Button>
                 <br/>
-                <Button onClick={event =>  window.location.href='/characters'}>Exit</Button>
+                <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
             </Dialog>
         )
     }

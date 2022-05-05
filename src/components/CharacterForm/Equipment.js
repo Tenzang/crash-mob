@@ -24,7 +24,7 @@ class Equipment extends Component{
                 maxWidth='sm'
             >
                 <AppBar title="Character Equipment" />
-                <h2>Character Equipment</h2>
+                <h2 class="headings">Character Equipment</h2>
                 <TextField
                     placeholder="Armour"
                     label="Armour"
@@ -59,15 +59,14 @@ class Equipment extends Component{
                         this.props.getHitDice()
                         this.continue(event)
                     }}
-
                 >Continue</Button>
-
+                <br/>
                 <Button
                     color="secondary"
                     variant="contained"
                     onClick={this.back}
                 >Back</Button>
-
+                <br/>
                 <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
                     
             </Dialog>

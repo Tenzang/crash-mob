@@ -59,7 +59,7 @@ class Languages extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Languages" />
-                <h2>Character Languages ({this.state.race})</h2>
+                <h2 class="headings">Character Languages ({this.state.race})</h2>
                 <p>{this.state.language_desc}</p>
                 <br/>
                 <h3>Known Languages</h3>
@@ -83,14 +83,14 @@ class Languages extends Component {
                     variant="contained"
                     onClick={this.continue}
                 >Continue</Button>
-
+                <br/>
                 <Button
                     color="secondary"
                     variant="contained"
                     onClick={this.back}
                 >Back</Button>
-
-                <Button onClick={ () => window.location.href='/characters' }>Exit</Button>
+                <br/>
+                <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
 
             </Dialog>
         );
