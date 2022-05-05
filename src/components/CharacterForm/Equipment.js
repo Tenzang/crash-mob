@@ -24,7 +24,7 @@ class Equipment extends Component{
                 maxWidth='sm'
             >
                 <AppBar title="Character Equipment" />
-                <h2>Character Equipment</h2>
+                <h2 class="headings">Character Equipment</h2>
                 <TextField
                     placeholder="Armour"
                     label="Armour"

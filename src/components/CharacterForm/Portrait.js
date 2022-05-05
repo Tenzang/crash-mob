@@ -22,7 +22,7 @@ function Portrait (props) {
             maxWidth='sm'
         >
             <AppBar title="Character Portrait" />
-                <h2>Portrait:</h2>
+                <h2 class="headings">Portrait:</h2>
                 <TextField
                     placeholder="http://..."
                     label="Character Portrait"

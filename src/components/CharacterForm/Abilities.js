@@ -63,7 +63,7 @@ class Abilities extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Abilities" />
-                <h2>Choose your Abilities</h2>
+                <h2 class="headings">Choose your Abilities</h2>
 
                 { this.state.abilities.map( (ability, index) => {
                     return (

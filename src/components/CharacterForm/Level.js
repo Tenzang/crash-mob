@@ -27,7 +27,7 @@ class Level extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Level" />
-                <h2>Character Level</h2>
+                <h2 class="headings">Character Level</h2>
                 <InputLabel id="character-level">Level</InputLabel>
                     <Select
                         label="Level"

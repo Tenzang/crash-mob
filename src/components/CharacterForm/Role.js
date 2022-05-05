@@ -41,7 +41,7 @@ class Role extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Class" />
-                <h2>Character Class</h2>
+                <h2 class="headings">Character Class</h2>
                 <Select
                     placeholder="Choose your Character's Class"
                     label= "Character Class"

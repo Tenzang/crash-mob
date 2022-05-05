@@ -25,7 +25,7 @@ class Details extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Details" />
-                <h2>Character Details</h2>
+                <h2 class="headings">Character Details</h2>
                 <TextField
                     placeholder="Personality Traits"
                     label="Personality Traits"
