@@ -41,7 +41,7 @@ class Race extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Race" />
-                <h2>Character Race</h2>
+                <h2 class="headings">Character Race</h2>
                 <Select
                     placeholder="Choose your Character's Race"
                     label= "Character Race"

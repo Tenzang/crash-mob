@@ -20,6 +20,10 @@ class SkillProficiencies extends Component {
       skills: []
     };
   }
+  componentDidMount() {
+    this.props.fetchUser();
+}
+
 
   continue = event => {
     event.preventDefault();
@@ -61,7 +65,7 @@ class SkillProficiencies extends Component {
                     maxWidth='sm'
                     >
               <AppBar title="Skill Proficiency" />
-              <h1>Skills</h1>
+              <h1 class="headings">Skills</h1>
               <br/>
               <h3>Starting Proficiencies</h3>
               <p>{this.state.race_proficiencies.map( ( name ) => {

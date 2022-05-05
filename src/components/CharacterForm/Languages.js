@@ -59,7 +59,7 @@ class Languages extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Languages" />
-                <h2>Character Languages ({this.state.race})</h2>
+                <h2 class="headings">Character Languages ({this.state.race})</h2>
                 <p>{this.state.language_desc}</p>
                 <br/>
                 <h3>Known Languages</h3>

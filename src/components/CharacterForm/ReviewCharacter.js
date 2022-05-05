@@ -6,14 +6,15 @@ function ReviewCharacter(props){
         event.preventDefault();
         props.prevStep();
     };
-    
+
+
     return(
         <Dialog
             open
             fullWidth
             maxWidth='sm'
         >
-            <h2>Character Complete</h2>
+            <h2 class="headings">Character Complete</h2>
             <Button color="primary" variant="contained" onClick={()=> {
                 props.createNewCharacter();
                 window.location.href='/characters';

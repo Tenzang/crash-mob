@@ -21,7 +21,7 @@ class Name extends Component {
                 maxWidth='sm'
             >
                 <AppBar title="Character Name" />
-                <h2>Character Name</h2>
+                <h2 class="headings">Character Name</h2>
                 <TextField
                     placeholder="Enter Your Character's Name"
                     label="Character Name"
