@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import axios from 'axios';
 import CharacterCard from './CharacterCard';
-const sourceURL = 'http://localhost:3000/characters.json';
+
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
 class CharacterIndexParent extends Component{
     constructor(props) {
@@ -16,7 +17,7 @@ class CharacterIndexParent extends Component{
         this.props.fetchUser();
 
         // Fetch Characters
-        axios(sourceURL, {withCredentials:true}).then(response => {
+        axios(sourceURL + 'characters.json', {withCredentials:true}).then(response => {
             const characters = response.data;
             this.setState({ characters: characters });
         });
@@ -24,7 +25,7 @@ class CharacterIndexParent extends Component{
     }
 
    handleDelete(id){
-        axios.delete(`http://localhost:3000/characters/${id}`, {withCredentials:true} ).then((response)=> {
+        axios.delete(sourceURL + 'characters/' + String(id), {withCredentials:true} ).then((response)=> {
             console.log(response);
             const newCharacters = this.state.characters.filter(character=> character.id !== id);
             this.setState({ characters: newCharacters })

@@ -3,8 +3,6 @@ import YoutubeEmbed from './YoutubeEmbeded';
 import { Button } from '@material-ui/core';
 import './style.css'
 class Home extends Component {
-
-  
   render() {
     return (
       <div class="container">
