@@ -26,7 +26,7 @@ class CharacterIndexParent extends Component{
    handleDelete(id){
         axios.delete(`http://localhost:3000/characters/${id}`, {withCredentials:true} ).then((response)=> {
             console.log(response);
-            const newCharacters = this.state.characters.filter(character=> character.id != id);
+            const newCharacters = this.state.characters.filter(character=> character.id !== id);
             this.setState({ characters: newCharacters })
         })
    }

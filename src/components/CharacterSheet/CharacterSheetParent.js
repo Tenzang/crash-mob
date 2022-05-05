@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import axios from 'axios';
-import _ from 'lodash';
 import Name from "./Name";
 import Race from "./Race";
 import Role from "./Role";
@@ -180,7 +179,7 @@ class CharacterSheetParent extends Component{
                         </Card>
                         <Card>
                             <Name name={ name } />
-                            <img></img>
+                            {/* TODO <img></img> */}
                             <Card align="center" style={cardStyle}>
                                 <Race race={ race } />
                                 <Role role={ role } />

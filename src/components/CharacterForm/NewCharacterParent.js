@@ -199,7 +199,11 @@ class NewCharacterParent extends Component{
                         portrait={values.portrait}
                     />
                 )
-
+            default:
+                return(
+                <div>
+                    <p>something went wrong...</p>
+                </div>)
         }
     };
 }
