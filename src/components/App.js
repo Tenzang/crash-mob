@@ -10,22 +10,25 @@ import { AppBar, Typography, Toolbar , Tabs, Tab, Button, useMediaQuery, useThem
 import NewCharacterParent from './CharacterForm/NewCharacterParent';
 import CasinoIcon from '@material-ui/icons/Casino';
 import DrawerComp from './DrawerComp'
+import './app.css'
+
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
 function App(){
 
   const trigger =useScrollTrigger();
   const[loggedInStatus, setLoggedInStatus] = useState(false)
   const[user, setUser] = useState({})
-  const [navValue, setNavValue] = useState();
+  const [navValue, setNavValue] = useState(0);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
-  const navPages =[{name: "Home", path: '/'},{name: "Characters", path: '/characters'}, {name:"New Character", path:'/newcharacter'}]
+  const navPages =[{name: "Home", path: '/'}, {name: "Characters", path: '/characters'}, {name:"New Character", path:'/newcharacter'}]
   const [characterId] = useState(null);
 
 
   const navigate = useNavigate();
 
-  const logoutURL = 'http://localhost:3000/logout'
+  const logoutURL = sourceURL + 'logout';
 
   const checkLogin=async(path)=>{
     const userData = await fetchUser();
@@ -38,22 +41,22 @@ function App(){
       }
     }
     else{
+      let index = navPages.findIndex(item => item.path === path)
+      setNavValue(index)
       setUser(userData.user)
       setLoggedInStatus(userData.logged_in)
       if (path === '/auth/login' || path === '/auth/registration'){
         navigate('/')
       }
-      else{
-        navigate(path)
-      }
+      
     }
   }
 
   function loggedIn(path, data){
     console.log(data)
-    navigate(path, data)
     setLoggedInStatus(data.logged_in)
     setUser(data.user)
+    navigate(path, data)
   }
 
   const loggedOut = async()=>{
@@ -76,7 +79,7 @@ function App(){
   }
 
 
-  const appbarStyle = {backgroundColor:'#D00000'}
+  const appbarStyle = {backgroundColor:'#456990'}
   const tabStyle = {marginLeft: 'auto'}
   const loginStyle = {marginLeft: 'auto' }
   const signupStyle = {marginLeft: '10px' }
@@ -101,10 +104,10 @@ function App(){
                       <Typography style={titleStyle}>
                         CRASH MOB
                       </Typography>
-                      <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
+                      <Tabs style={tabStyle} textColor="inherit" value={navValue} onChange={(event, value)=> setNavValue(value)} indicatorColor="primary">
                         { 
                         navPages.map((page, index)=>(
-                        <Tab key={index} label={page.name} onClick={()=>navigate(page.path)}/>
+                        <Tab value={index} key={index} label={page.name} onClick={()=>navigate(page.path)}/>
                       ))
                         }
                       </Tabs>
@@ -115,9 +118,10 @@ function App(){
                       <Typography style={titleStyle}>
                         CRASH MOB
                       </Typography>
-                      <Tabs style={tabStyle} textColor="inherit" value={0} onChange={(event, value)=> setNavValue(value)} indicatorColor="secondary">
+                      <Tabs style={tabStyle} textColor="inherit" value={0} onChange={(event, value)=> setNavValue(value)} indicatorColor="primary">
                         <Tab label={'Home'} onClick={()=>navigate('/')}/>
                       </Tabs>
+                      <h6>{user.username}</h6>
                       <Button style={loginStyle} onClick={()=>navigate('/auth/login')} variant="contained">LogIn</Button>
                       <Button style={signupStyle} onClick={()=>navigate('/auth/registration')} variant="contained">Sign-Up</Button>
                     </>
@@ -127,9 +131,6 @@ function App(){
               </Toolbar>
             </AppBar>
           </Slide>
-          <div className="feed">
-            <h1>Placeholder to bump content below the navbar</h1> 
-          </div>
         </>
           <Routes>
               <Route exact path={'/'} element={<Home fetchUser={checkLogin} loggedInStatus={loggedInStatus}/>}/>

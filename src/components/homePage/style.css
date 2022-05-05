@@ -1,12 +1,26 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Montserrat:wght@200&family=Prompt:wght@200&display=swap");
 
+/* Brand Coolors */
+/* wine: #6B2737;
+fieryrose: #F45B69;
+lavender: #D8DDEF;
+queenblue: #456990;
+midnightgreen: #114B5F; */
 
-h2{
+.container {
+  overflow: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+#welcome {
   font-family: 'Bebas Neue', cursive;
   text-align: center;
   font-size: 60px;
-  
+  margin-top: 5%;
 }
+
 .home{
   font-family: 'Bebas Neue', cursive;
   text-align: center;
@@ -14,9 +28,8 @@ h2{
   font-size: 25px;
   padding: 2%;
 }
-
-.button {
-  background-color: #4CAF50; 
+#button {
+  background-color: #114B5F; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -24,18 +37,26 @@ h2{
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 0;
-  position: fixed;
-  top: 44%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  margin: auto;
 }
 .iframe-container{
-  margin: 0;
-  position: fixed;
-  top: 75%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  margin: auto;
+  display: flexbox;
+  padding-top: 5%;
+}
+
+@media only screen and (max-width: 790px) {
+  .home {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    overflow: scroll;
+  }
+
+  #welcome {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    border-bottom: 0px;
+  }
+
 }

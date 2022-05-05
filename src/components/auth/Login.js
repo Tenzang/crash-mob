@@ -4,7 +4,9 @@ import { Button, Grid, Paper, Avatar, TextField, Typography} from '@material-ui/
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { Link } from "react-router-dom";
 
-const sessionsURL = "http://localhost:3000/sessions"
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
+const sessionsURL = sourceURL + 'sessions'
+
 export default class Login extends Component {
     constructor(props){
         super(props)

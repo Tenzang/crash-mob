@@ -20,21 +20,17 @@ class SkillProficiencies extends Component {
       skills: []
     };
   }
-  componentDidMount() {
-    this.props.fetchUser();
-}
-
 
   continue = event => {
     event.preventDefault();
     this.props.nextStep();
   };
-
+  
   back = event => {
     event.preventDefault();
     this.props.prevStep();
   };
-
+  
   componentDidMount() {
       axios.get('https://www.dnd5eapi.co/api/classes/' + this.state.role.toLowerCase())
       .then(res => {  
@@ -106,18 +102,19 @@ class SkillProficiencies extends Component {
                       return <MenuItem value={name}>{name}</MenuItem>})}
               </Select>
               <br/>
-
-              <Button
-                  color="secondary"
-                  variant="contained"
-                  onClick={this.back}
-              >Back</Button>
-
-              <Button
-                  color="primary"
-                  variant="contained"
-                  onClick={this.continue}
-              >Continue</Button>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={this.continue}
+                >Continue</Button>
+                <br/>
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={this.back}
+                >Back</Button>
+                <br/>
+                <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
               
             </Dialog>
         </>

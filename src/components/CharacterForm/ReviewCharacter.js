@@ -19,13 +19,13 @@ function ReviewCharacter(props){
                 props.createNewCharacter();
                 window.location.href='/characters';
             }}>Create!</Button>
-
+            <br/>
             <Button
                 color="secondary"
                 variant="contained"
                 onClick={back}
             >Back</Button>
-
+            <br/>
             <Button onClick={ () =>  window.location.href='/characters' }>Exit</Button>
         </Dialog>
     );

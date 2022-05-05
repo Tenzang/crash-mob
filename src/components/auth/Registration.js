@@ -4,7 +4,8 @@ import { Button, Grid, Paper, Avatar, TextField, Typography} from '@material-ui/
 import CreateIcon from '@material-ui/icons/Create';
 import { Link } from "react-router-dom";
 
-const registrationsURL = "http://localhost:3000/registrations"
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
+const registrationsURL = sourceURL + 'registrations'
 
 export default class Registration extends Component {
     constructor(props){
@@ -75,7 +76,7 @@ export default class Registration extends Component {
                         <TextField label='Email' name='email' value={this.state.email} placeholder="Enter Email" fullWidth onChange={this.handleChange} required></TextField>
                         <TextField label='Username' name='username' value={this.state.username} placeholder="Username" fullWidth onChange={this.handleChange} required></TextField>
                         <TextField label='Password' name='password' value={this.state.password} placeholder="Enter Password" type="password" fullWidth onChange={this.handleChange} required></TextField>
-                        <TextField label='Password_Confirmation' name='password confirmation' value={this.state.password_confirmation} placeholder="Confirm Password" type="password" fullWidth onChange={this.handleChange} required></TextField>              
+                        <TextField label='Password Confirmation' name='password_confirmation' value={this.state.password_confirmation} placeholder="Confirm Password" type="password" fullWidth onChange={this.handleChange} required></TextField>              
                         <Button variant='contained' color="primary" style={btnstyle} type='submit' fullWidth>Sign-UP</Button>
                         </form>
                     <Typography> Already have an account? <br></br>
