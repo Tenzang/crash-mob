@@ -10,8 +10,7 @@ import SavingThrows from "./SavingThrows";
 import Health from "./Health";
 import { Button, Grid, Paper, Card } from "@material-ui/core";
 
-
-const sourceURL = 'http://localhost:3000';
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
 const modifier = score => Math.floor((score - 10) / 2);
 
@@ -50,7 +49,7 @@ class CharacterSheetParent extends Component{
                 survival: { proficient: false, ability: 'wisdom' },
             },
             proficiencyMod: 2,
-            URL: {character: `${sourceURL}/characters/`, score: `${sourceURL}/scores/`, skills: `${sourceURL}/skills/`, abilities: `${sourceURL}/abilities/` },
+            URL: {character: sourceURL + '/characters/', score: sourceURL + 'scores/', skills: sourceURL + 'skills/', abilities: sourceURL + 'abilities/' },
             name: "???",
             race: "???",
             role: "???",
