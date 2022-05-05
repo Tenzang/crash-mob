@@ -4,7 +4,8 @@ import { Button, Grid, Paper, Avatar, TextField, Typography} from '@material-ui/
 import CreateIcon from '@material-ui/icons/Create';
 import { Link } from "react-router-dom";
 
-const registrationsURL = "http://localhost:3000/registrations"
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
+const registrationsURL = sourceURL + 'registrations'
 
 export default class Registration extends Component {
     constructor(props){

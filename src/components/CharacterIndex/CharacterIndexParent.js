@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from 'axios';
 import CharacterCard from './CharacterCard';
+import "./indexstyle.css"
 const sourceURL = 'http://localhost:3000/characters.json';
 
 class CharacterIndexParent extends Component{
@@ -16,7 +17,7 @@ class CharacterIndexParent extends Component{
         this.props.fetchUser('/characters');
 
         // Fetch Characters
-        axios(sourceURL, {withCredentials:true}).then(response => {
+        axios(sourceURL + 'characters.json', {withCredentials:true}).then(response => {
             const characters = response.data;
             this.setState({ characters: characters });
         });
@@ -24,7 +25,7 @@ class CharacterIndexParent extends Component{
     }
 
    handleDelete(id){
-        axios.delete(`http://localhost:3000/characters/${id}`, {withCredentials:true} ).then((response)=> {
+        axios.delete(sourceURL + 'characters/' + String(id), {withCredentials:true} ).then((response)=> {
             console.log(response);
             const newCharacters = this.state.characters.filter(character=> character.id !== id);
             this.setState({ characters: newCharacters })
@@ -34,9 +35,15 @@ class CharacterIndexParent extends Component{
     render(){
         const indexStyle = {marginTop: '10%'}
         return(
-            <div style={indexStyle}>
-                <CharacterCard handleDelete={this.handleDelete} characters={ this.state.characters } />
-            </div>
+            <>
+                { this.state.characters.length > 0 ? (
+                    <div style={indexStyle}>
+                        <CharacterCard handleDelete={this.handleDelete} characters={ this.state.characters } />
+                    </div>
+                ) : (
+                    <h1>Hey N00b. Create your first character!</h1> )
+                }
+            </>
         )
     }
 }

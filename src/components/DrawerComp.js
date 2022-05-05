@@ -12,13 +12,13 @@ const DrawerComp = (props) => {
 
   return (
     <>
-        <Drawer open={drawerState} onClose={()=>setDrawerState(false)}>
+        <Drawer open={drawerState} key={0} onClose={()=>setDrawerState(false)}>
             <List>
                 {props.loginState?(
                     navPagesLoggedIn.map((page, index)=>(
                         <>
                             <ListItem onClick={ () => { setDrawerState(false); navigate(page.path) } } button key={index}>
-                                <ListItemIcon>
+                                <ListItemIcon key={index}>
                                     <ListItemText>{page.name}</ListItemText>
                                 </ListItemIcon>
                             </ListItem>
@@ -28,7 +28,7 @@ const DrawerComp = (props) => {
                     navPagesLoggedOut.map((page, index)=>(
                         <>
                             <ListItem onClick={ () => { setDrawerState(false); navigate(page.path) } } button key={index}>
-                                <ListItemIcon>
+                                <ListItemIcon key={index}>
                                     <ListItemText>{page.name}</ListItemText>
                                 </ListItemIcon>
                             </ListItem>

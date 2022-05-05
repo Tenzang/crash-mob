@@ -15,12 +15,10 @@ import Speed from './Speed'
 import TempHp from './TempHp'
 import HitDice from "./HitDice";
 import DeathThrows from './DeathThrows'
-import { Button, Grid, Paper, Card } from "@material-ui/core";
-import { grid } from "@mui/system";
+import { Paper, Card } from "@material-ui/core";
 import './CharacterSheet.css'
 
-
-const sourceURL = 'http://localhost:3000';
+const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
 const modifier = score => Math.floor((score - 10) / 2);
 
@@ -59,7 +57,7 @@ class CharacterSheetParent extends Component{
                 survival: { proficient: false, ability: 'wisdom' },
             },
             proficiencyMod: 2,
-            URL: {character: `${sourceURL}/characters/`, score: `${sourceURL}/scores/`, skills: `${sourceURL}/skills/`, abilities: `${sourceURL}/abilities/` },
+            URL: {character: sourceURL + '/characters/', score: sourceURL + 'scores/', skills: sourceURL + 'skills/', abilities: sourceURL + 'abilities/' },
             name: "???",
             race: "???",
             role: "???",
@@ -182,7 +180,7 @@ class CharacterSheetParent extends Component{
             <div style={sheetStyle}>
                 <Paper style={headerStyle}>
                     <Card align="center">
-                        <img style={imageStyle} src={image}/>
+                        <img style={imageStyle} src={image} alt="character portrait" />
                     </Card>
                     <Card style={headerInfo}>
                         <div style={charInfo}>
