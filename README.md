@@ -6,8 +6,9 @@ https://github.com/Tenzang/crash-mob-server
 
 Login
 -----------
-jonesy@ga.co
-pw:'chicken'
+user login:jonesy@ga.co
+-----------------------
+password:'chicken'
 
 Client
 -----------
