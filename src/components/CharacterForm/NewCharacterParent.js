@@ -91,8 +91,6 @@ class NewCharacterParent extends Component{
     }
     // Helper function to join known skills with chosen starting skills
     handleSkillChange = input => event => {
-        console.log('changing Skills')
-        console.log(event)
         this.setState({skills: [...this.state.skills, event.target.value]})
     };
 
