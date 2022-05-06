@@ -12,8 +12,7 @@ import Languages from "./Languages";
 import Equipment from "./Equipment";
 import Portrait from "./Portrait";
 import ReviewCharacter from "./ReviewCharacter";
-
-// import SavingThrows from "./SavingThrows";
+import "./formstyle.css"
 
 const sourceURL = process.env.REACT_APP_SOURCE_URL;
 
