@@ -39,7 +39,7 @@ class Languages extends Component {
             // Get known languages from API
             const languages = res.data.languages.map( ( {name} ) => name);
             this.setState({ languages })
-            this.props.knownLanguage(languages)
+            this.props.knownLanguage(languages);
 
             // Get extra language choices from API (if applicable)
             if(res.data.hasOwnProperty('language_options')){
@@ -65,18 +65,24 @@ class Languages extends Component {
                 <h3>Known Languages</h3>
                 <p>{this.state.languages.map( ( language ) => {
                         return <MenuItem value={language}>{language}</MenuItem>})}</p>
-                <h3>Extra Language</h3>
-                <Select
-                    placeholder="Extra Language (Race)"
-                    label= "Extra Language (Race)"
-                    onChange={handleLanguageChange('languages')}
-                    defaultValue={values.language_options}
-                    margin="normal"
-                    fullWidth
-                >
-                        {this.state.language_options.map( ( {name}, index ) => {
-                        return <MenuItem key={index} value={name}>{name}</MenuItem>})}
-                </Select>
+                { this.state.language_options.length > 0 ? (
+                    <h3>Extra Language</h3> ) : (<p></p>)
+                }
+                { this.state.language_options.length > 0 ? (
+                    <Select
+                        placeholder="Extra Language (Race)"
+                        label= "Extra Language (Race)"
+                        onChange={handleLanguageChange('languages')}
+                        defaultValue={values.language_options}
+                        margin="normal"
+                        fullWidth
+                    >
+                            {this.state.language_options.map( ( {name}, index ) => {
+                            return <MenuItem key={index} value={name}>{name}</MenuItem>})}
+                    </Select>
+                ) : (<p></p>)
+                }
+                
                 <br/>
                 <Button
                     color="primary"
