@@ -5,7 +5,7 @@ https://github.com/Tenzang/crash-mob-client
 https://github.com/Tenzang/crash-mob-server
 
 Login
------------
+-----------------------
 user login:jonesy@ga.co
 -----------------------
 password:'chicken'
@@ -22,6 +22,7 @@ To Be Added
 - Map/Token/Asset Upload
 - Backgrounds added to characters
 - Character Creator Component - spells
+- Plan to add Cloudinary as our file upload 
 
 Challenges
 ----------
