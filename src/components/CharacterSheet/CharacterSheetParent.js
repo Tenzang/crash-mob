@@ -165,7 +165,7 @@ class CharacterSheetParent extends Component{
     }
 
     render(){
-        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice, hit_dice, dSaveSucc, dSaveFail, speed, languages, inspiration, xp, equipment, tempHP, ideals, bonds, flaws, image  } = this.state;
+        const { abilities, skills, proficiencyMod, name, race, role, level, saveProfs, hitpoints, hitDice, hit_dice, dSaveSucc, dSaveFail, speed, languages, xp, equipment, tempHP, ideals, bonds, flaws, image  } = this.state;
         const headerStyle = {display: "grid", gridTemplateColumns:"20% 80%", paddingTop: '2.5%', paddingRight: '2.5%', paddingLeft: '0.5%'}
         const headerInfo ={ gridTemplateRows:"50% 50%" }
         const sheetStyle = {display: "grid", gridTemplateRows:"26% 74%", maxHeight: '1200px', width:'50%', margin: '5% auto', border: '2px solid rgba(46, 71, 96, 1)'}

@@ -30,7 +30,7 @@ function CharacterCard(props) {
                                     title={character.name}
                                 />
                                 { character.image === '' ? (
-                                    <img style={imgStyle} src='https://trello-logos.s3.amazonaws.com/64a30c1b494db6b01d6b3bc4771da313/170.png' />
+                                    <img style={imgStyle} src='https://trello-logos.s3.amazonaws.com/64a30c1b494db6b01d6b3bc4771da313/170.png' alt ="crash-mob logo" />
                                 ) : (
                                     <img style={imgStyle} src={character.image} alt={ "portrait of " + character.name }/>
                                     )
