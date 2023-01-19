@@ -1,48 +1,77 @@
-import React, { useState } from 'react'
-import { Drawer, List, IconButton, ListItemText, ListItem, ListItemIcon} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { useState } from "react";
+import {
+  Drawer,
+  List,
+  IconButton,
+  ListItemText,
+  ListItem,
+  ListItemIcon,
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 import { useNavigate } from "react-router-dom";
 
 const DrawerComp = (props) => {
-    const navigate = useNavigate();
-    const [drawerState, setDrawerState] = useState(false)
-    const iconButtonStyle = {color:'white', marginLeft:'auto'}
-    const navPagesLoggedIn =[{name: "Home", path: '/'},{name: "Characters", path: '/characters'}, {name:"New Character", path:'/newcharacter'}]
-    const navPagesLoggedOut =[{name: "Home", path: '/'},{name: "Login", path: '/auth/login'}, {name:"Sign Up", path:'/auth/registration'}]
+  const navigate = useNavigate();
+  const [drawerState, setDrawerState] = useState(false);
+  const iconButtonStyle = { color: "white", marginLeft: "auto" };
+  const navPagesLoggedIn = [
+    { name: "Home", path: "/" },
+    { name: "Characters", path: "/characters" },
+    { name: "New Character", path: "/newcharacter" },
+  ];
+  const navPagesLoggedOut = [
+    { name: "Home", path: "/" },
+    { name: "Login", path: "/auth/login" },
+    { name: "Sign Up", path: "/auth/registration" },
+  ];
 
   return (
     <>
-        <Drawer open={drawerState} key={0} onClose={()=>setDrawerState(false)}>
-            <List>
-                {props.loginState?(
-                    navPagesLoggedIn.map((page, index)=>(
-                        <>
-                            <ListItem onClick={ () => { setDrawerState(false); navigate(page.path) } } button key={index}>
-                                <ListItemIcon key={index}>
-                                    <ListItemText>{page.name}</ListItemText>
-                                </ListItemIcon>
-                            </ListItem>
-                        </> 
-                    ))
-                ):(
-                    navPagesLoggedOut.map((page, index)=>(
-                        <>
-                            <ListItem onClick={ () => { setDrawerState(false); navigate(page.path) } } button key={index}>
-                                <ListItemIcon key={index}>
-                                    <ListItemText>{page.name}</ListItemText>
-                                </ListItemIcon>
-                            </ListItem>
-                        </> 
-                    ))
-                )
-                }
-            </List>
-        </Drawer>
-        <IconButton style={iconButtonStyle} onClick={()=> setDrawerState(!drawerState)}>
+      <Drawer open={drawerState} key={0} onClose={() => setDrawerState(false)}>
+        <List>
+          {props.loginState
+            ? navPagesLoggedIn.map((page, index) => (
+                <>
+                  <ListItem
+                    onClick={() => {
+                      setDrawerState(false);
+                      navigate(page.path);
+                    }}
+                    button
+                    key={index}
+                  >
+                    <ListItemIcon key={index}>
+                      <ListItemText>{page.name}</ListItemText>
+                    </ListItemIcon>
+                  </ListItem>
+                </>
+              ))
+            : navPagesLoggedOut.map((page, index) => (
+                <>
+                  <ListItem
+                    onClick={() => {
+                      setDrawerState(false);
+                      navigate(page.path);
+                    }}
+                    button
+                    key={index}
+                  >
+                    <ListItemIcon key={index}>
+                      <ListItemText>{page.name}</ListItemText>
+                    </ListItemIcon>
+                  </ListItem>
+                </>
+              ))}
+        </List>
+      </Drawer>
+      <IconButton
+        style={iconButtonStyle}
+        onClick={() => setDrawerState(!drawerState)}
+      >
         <MenuIcon></MenuIcon>
-        </IconButton>
+      </IconButton>
     </>
-  )
-}
+  );
+};
 
-export default DrawerComp
+export default DrawerComp;

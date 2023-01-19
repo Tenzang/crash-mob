@@ -1,11 +1,11 @@
 .character-btn {
-    background-color: #114B5F;
-    border: none;
-    border-radius: 0.5em;
-    color: white;
-    padding: 15px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+  background-color: #114b5f;
+  border: none;
+  border-radius: 0.5em;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
